@@ -1,3 +1,11 @@
+
+renv::init()
+install.packages("renv")
+
+# run regularily: 
+renv::snapshot()
+renv::status()
+
 ####### Install the required packages for your analysis
 #BiocManager::install("dada2")
 #BiocManager::install("DECIPHER")

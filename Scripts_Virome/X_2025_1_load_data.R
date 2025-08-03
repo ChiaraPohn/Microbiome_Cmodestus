@@ -24,14 +24,15 @@ here::i_am("2025_1_load_data.R")
 #paths to my tables
 abundance_table <- "Tables_Virome/LS_abundance_1000.tsv"
 #or
-abundance_table <- "Tables_Virome/LS_abundance_1000_adjusted.tsv"
-
+abundance_table <- "Tables_Virome/LS_abundance_adjusted.csv"
 taxonomy_table <- "Tables_Virome/taxonomy/LS_taxonomy-taxfile.tsv"
 metadata_table <- "LS_Cmodestus_metadata.csv"
 completeness_table <- "Tables_Virome/checkv/quality_summary.tsv"
   
 # Abundance table
 OTU <- read.table(abundance_table, header=TRUE, row.names=1, sep="\t", dec=".")
+#or
+OTU <- read.table(abundance_table, header=TRUE, row.names=1, sep=";", dec=".")
 
 
 #all of my reads:

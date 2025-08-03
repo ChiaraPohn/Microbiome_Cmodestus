@@ -9,8 +9,6 @@ source("2025_2_alpha_diversity.R")
 #get my OTUs as relative abundances instead:
 otu_rel_abundance <- as(otu_table(phyloseq), "matrix")
 
-otu_combined <- as(otu_combined, "matrix")
-otu_rel_abundance <- otu_combined
 
 # Loop through each sample in sample_counts and normalize only matching columns
 for (sample in names(sample_counts)) {
@@ -91,7 +89,7 @@ ggplot(OTU_tidy, aes(x = Sample, y = OTU, fill = Abundance)) +
     axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 6, color = "black")
   )
 
-ggsave("Plots_Virome/Heatmap_all.png", dpi = 300, width = 280, height = 130, units = "mm")
+ggsave("Plots_Virome/Heatmap_all_XYadj.png", dpi = 300, width = 280, height = 130, units = "mm")
 
 
 #excluding the contaminants: 
@@ -169,7 +167,7 @@ main_heatmap <- ggplot(OTU_tidy, aes(x = Sample, y = OTU, fill = Abundance)) +
 
 main_heatmap 
 
-ggsave("Plots_Virome/Heatmap_palmprint.png", dpi = 300, width = 280, height = 130, units = "mm")
+ggsave("Plots_Virome/Heatmap_palmprint_XYadj.png", dpi = 300, width = 280, height = 130, units = "mm")
 
 generation_palette <- c(
   "F0 2020" = "tomato",     
@@ -200,7 +198,7 @@ combined_plot <- (main_heatmap / generation_bar) +
 
 combined_plot
 
-ggsave("Plots_Virome/Heatmap_palmprint_generation.png", dpi = 300, width = 280, height = 150, units = "mm")
+ggsave("Plots_Virome/Heatmap_palmprint_generation_XYadj.png", dpi = 300, width = 280, height = 150, units = "mm")
 
 
 

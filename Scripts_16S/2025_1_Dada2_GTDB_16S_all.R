@@ -1,10 +1,4 @@
 
-renv::init()
-install.packages("renv")
-
-# run regularily: 
-renv::snapshot()
-renv::status()
 
 ####### Install the required packages for your analysis
 #BiocManager::install("dada2")
@@ -26,7 +20,8 @@ Project <- "16S_all"
 Database <- "GTDB"
 
 #path to the downloaded fasta files
-path <- "C:\\Users\\user\\Desktop\\Leuven\\LS_Cmodestus\\16S\\16S_RStudio\\16S_data_all/"
+path <- "C:\\Users\\user\\Desktop\\Leuven\\Paper 2025\\Microbiome_Cmodestus\\16S_data_all/"
+
 
 list.files(path)
 

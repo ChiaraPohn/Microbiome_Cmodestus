@@ -9,7 +9,7 @@ library(ggtext)
 library(ggalluvial)
 library(patchwork)
 
-#source("2025_4_alpha_beta_diversity.R")
+source("2025_4_alpha_beta_diversity.R")
 
 #' Custom legend plot function
 addSmallLegend <- function(myPlot, pointSize = 0.75, textSize = 6, spaceLegend = 0.1) {

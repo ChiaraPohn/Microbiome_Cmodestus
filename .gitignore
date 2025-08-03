@@ -2,6 +2,9 @@
 .Rhistory
 .RData
 .Ruserdata
-
 #large data
 *.fastq.gz
+16S_R/16S_data_all/
+Virome_R/Tables
+*.fastq
+*.png

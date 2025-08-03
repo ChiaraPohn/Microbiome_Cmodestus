@@ -11,11 +11,12 @@ library(ggthemes)
 
 OTU_XY <- read.table("Tables_Virome/LS_XiangYun_abundance.csv", header=TRUE, row.names=1, sep=";", dec=".")
 
-OTU_rest <- as.data.frame(OTU_palm_X)
+Otus_to_remove <- c("NODE_A3_length_5049_cov_26.666935_LS40", "NODE_A1_length_9685_cov_312.741153_W50", "NODE_A1_length_9715_cov_66.678149_LS33")
 
+OTU_rest <- as.data.frame(otu_table(phyloseq))
+OTU_rest_filtered <- OTU_rest[!rownames(OTU_rest) %in% Otus_to_remove, ]
 
-
-otu_combined <- dplyr::bind_rows(OTU_XY, OTU_rest)
+otu_combined <- dplyr::bind_rows(OTU_XY, OTU_rest_filtered)
 
 # Replace NA values with zero for abundance columns
 otu_combined[is.na(otu_combined)] <- 0
@@ -43,7 +44,7 @@ OTU_tidy <-
   #mutate_at(vars(-`OTU`, -hp, -vs), scale) |>
   
   # tidyfy
-pivot_longer(cols = 2:ncol(OTU_palm), names_to = "Sample", values_to = "Abundance")
+pivot_longer(cols = 2:ncol(OTU_X), names_to = "Sample", values_to = "Abundance")
 
 OTU_tidy
 
@@ -66,7 +67,7 @@ OTU_tidy <- OTU_tidy %>%
 
 #add meta
 OTU_tidy <- OTU_tidy %>%
-  left_join(meta_palm, by = "Sample") 
+  left_join(meta, by = "Sample") 
 
 #OTU_tidy_log <- OTU_tidy %>%
 #  mutate(log_Abundance = log10(Abundance + 1))

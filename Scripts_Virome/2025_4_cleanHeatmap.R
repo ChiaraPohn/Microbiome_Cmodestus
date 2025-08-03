@@ -9,6 +9,9 @@ source("2025_2_alpha_diversity.R")
 #get my OTUs as relative abundances instead:
 otu_rel_abundance <- as(otu_table(phyloseq), "matrix")
 
+otu_combined <- as(otu_combined, "matrix")
+otu_rel_abundance <- otu_combined
+
 # Loop through each sample in sample_counts and normalize only matching columns
 for (sample in names(sample_counts)) {
   if (sample %in% colnames(otu_rel_abundance)) {
@@ -35,11 +38,12 @@ OTU_tidy
 new_otu_names <- c("NODE_A13_length_3436_cov_154.678773_W39" = "Broome luteo-like virus 1", 
                    "NODE_A1_length_10358_cov_1043.127711_W54"= "Alexandroupolis virga-like virus 1", 
                    "NODE_A1_length_11032_cov_3358.452670_W34" = "Yongsan negev-like virus 1", 
-                   "NODE_A1_length_7154_cov_76.883284_LS63" = "XiangYun toti-like virus 5 LS63", 
+                   "NODE_A1_length_7154_cov_76.883284_LS63" = "CmLeuv toti-like virus LS63", 
                    "NODE_A1_length_9685_cov_312.741153_W50" ="XiangYun picorna-like virus 2 W50", 
                    "NODE_A1_length_9715_cov_66.678149_LS33" ="XiangYun picorna-like virus 2 LS33", 
+                   "NODE_A3_length_5049_cov_26.666935_LS40" = "XiangYun picorna-like virus 2 LS40",
                    "NODE_A2_length_6321_cov_434.172165_LS72" = "Culex inatomii totivirus",
-                   "NODE_A2_length_7099_cov_245.671176_W34" = "XiangYun toti-like virus 5 W34", 
+                   "NODE_A2_length_7099_cov_245.671176_W34" = "CmLeuv toti-like virus W34", 
                    "NODE_A45_length_2262_cov_3.486957_LS18" = "Parvovirus NIH-CQV", 
                    "NODE_A26_length_2598_cov_59.167394_LS_NIC2" = "Parvo-like hybrid virus", 
                    "NODE_A25_length_3182_cov_46.514654_LS.NIC5" = "Parvovirus NIH-CQV",
@@ -57,8 +61,11 @@ OTU_tidy <- OTU_tidy %>%
 
 
 #add meta
+
+meta <- as.data.frame(sample_data(phyloseq))
+
 OTU_tidy <- OTU_tidy %>%
-  left_join(meta_palm, by = "Sample") 
+  left_join(meta, by = "Sample") 
 
 OTU_tidy$Group <- factor(OTU_tidy$Generation, levels = c("F0 2023", "F0 2020", "F0 2022", "F3", "F4", "F5", "F6", "F7", "F8", "F9"))
 
@@ -84,7 +91,7 @@ ggplot(OTU_tidy, aes(x = Sample, y = OTU, fill = Abundance)) +
     axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 6, color = "black")
   )
 
-ggsave("Plots/Heatmap_all.png", dpi = 300, width = 280, height = 130, units = "mm")
+ggsave("Plots_Virome/Heatmap_all.png", dpi = 300, width = 280, height = 130, units = "mm")
 
 
 #excluding the contaminants: 
@@ -113,11 +120,11 @@ OTU_tidy
 new_otu_names <- c("NODE_A13_length_3436_cov_154.678773_W39" = "Broome luteo-like virus 1", 
                    "NODE_A1_length_10358_cov_1043.127711_W54"= "Alexandroupolis virga-like virus 1", 
                    "NODE_A1_length_11032_cov_3358.452670_W34" = "Yongsan negev-like virus 1", 
-                   "NODE_A1_length_7154_cov_76.883284_LS63" = "XiangYun toti-like virus 5 LS63", 
+                   "NODE_A1_length_7154_cov_76.883284_LS63" = "CmLeuv toti-like virus LS63", 
                    "NODE_A1_length_9685_cov_312.741153_W50" ="XiangYun picorna-like virus 2 W50", 
                    "NODE_A1_length_9715_cov_66.678149_LS33" ="XiangYun picorna-like virus 2 LS33", 
                    "NODE_A2_length_6321_cov_434.172165_LS72" = "Culex inatomii totivirus",
-                   "NODE_A2_length_7099_cov_245.671176_W34" = "XiangYun toti-like virus 5 W34", 
+                   "NODE_A2_length_7099_cov_245.671176_W34" = "CmLeuv toti-like virus W34", 
                     "NODE_A31_length_1757_cov_2823.019643_G28" = "Sonnbo virus", 
                    "NODE_B2_length_5021_cov_122.489280_W34" = "Hubei mosquito virus 4")
 
@@ -127,8 +134,11 @@ OTU_tidy <- OTU_tidy %>%
 
 
 #add meta
+
+
+
 OTU_tidy <- OTU_tidy %>%
-  left_join(meta_palm, by = "Sample") 
+  left_join(meta, by = "Sample") 
 
 
 #OTU_tidy_log$Group <- factor(OTU_tidy_log$Generation, levels = c("F0", "F0 2020", "F0 2022", "F3", "F4", "F5", "F6", "F7", "F8", "F9"))
@@ -159,7 +169,7 @@ main_heatmap <- ggplot(OTU_tidy, aes(x = Sample, y = OTU, fill = Abundance)) +
 
 main_heatmap 
 
-ggsave("Plots/Heatmap_palmprint.png", dpi = 300, width = 280, height = 130, units = "mm")
+ggsave("Plots_Virome/Heatmap_palmprint.png", dpi = 300, width = 280, height = 130, units = "mm")
 
 generation_palette <- c(
   "F0 2020" = "tomato",     
@@ -190,7 +200,7 @@ combined_plot <- (main_heatmap / generation_bar) +
 
 combined_plot
 
-ggsave("Plots/Heatmap_palmprint_generation.png", dpi = 300, width = 280, height = 150, units = "mm")
+ggsave("Plots_Virome/Heatmap_palmprint_generation.png", dpi = 300, width = 280, height = 150, units = "mm")
 
 
 

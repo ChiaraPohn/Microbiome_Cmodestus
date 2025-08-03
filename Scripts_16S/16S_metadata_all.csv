@@ -1,0 +1,110 @@
+﻿Sample;W/G Name;Generation;Generation_combinedF0;Original name;Date extraction;Body part;Control;Condition;Fragmented;Storage;WNV;USUV;Water%;Comment_water;Food_larvae;Bloodmeal;WTA conc;Antibiotic;Origin;Taxonomy;Experiment
+LS1;;F6;F6;;06.06.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;145;NA;;Culex;LS
+LS10;;F6;F6;;10.06.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;128;NA;;Culex;LS
+LS11;;F5;F5;;10.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;173;NA;;Culex;LS
+LS12;;F8;F8;;10.06.2024;whole mosquito;no;dry;no;-80°C;no;no;0;Tap;cat food;no;46.6;NA;;Culex;LS
+LS13;;F7;F7;;10.06.2024;whole mosquito;no;PBS;no;-80°C;no;no;0;Tap;cat food;no;179;NA;;Culex;LS
+LS15;;F8;F8;;10.06.2024;whole mosquito;no;dry;no;-80°C;no;no;0;Tap;cat food;no;87;NA;;Culex;LS
+LS16;;F5;F5;;10.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;140;NA;;Culex;LS
+LS17;;F7;F7;;11.06.2024;whole mosquito;no;PBS;no;-80°C;no;no;0;Tap;cat food;no;172;NA;;Culex;LS
+LS18;;F8;F8;;11.06.2024;whole mosquito;no;dry;no;-80°C;no;no;0;Tap;cat food;no;160;NA;;Culex;LS
+LS19;;F6;F6;;11.06.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;158;NA;;Culex;LS
+LS2;;F8;F8;;06.06.2024;whole mosquito;no;dry;no;-80°C;no;no;0;Tap;cat food;no;95;NA;;Culex;LS
+LS20;;F6;F6;;11.06.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;159;NA;;Culex;LS
+LS21;;F3;F3;;11.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;136;NA;;Culex;LS
+LS22;;F5;F5;;11.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;139;NA;;Culex;LS
+LS24;;F3;F3;;11.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;140;NA;;Culex;LS
+LS25;;F4;F4;;11.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;137;NA;;Culex;LS
+LS26;;F7;F7;;11.06.2024;whole mosquito;no;PBS;no;-80°C;no;no;0;Tap;cat food;no;184;NA;;Culex;LS
+LS27;;F8;F8;;11.06.2024;whole mosquito;no;dry;no;-80°C;no;no;0;Tap;cat food;no;64;NA;;Culex;LS
+LS28;;F9;F9;;12.06.2024;whole mosquito;no;dry;no;-80°C;no;no;0;MiliQ;cat food;no;105;NA;;Culex;LS
+LS29;;F9;F9;;12.06.2024;whole mosquito;no;dry;no;-80°C;no;no;0;MiliQ;cat food;no;134;NA;;Culex;LS
+LS3;;F6;F6;;06.06.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;139;NA;;Culex;LS
+LS30;;F7;F7;;12.06.2024;whole mosquito;no;PBS;no;-80°C;no;no;0;Tap;cat food;no;164;NA;;Culex;LS
+LS32;;F7;F7;;12.06.2024;whole mosquito;no;PBS;no;-80°C;no;no;0;Tap;cat food;no;48.5;NA;;Culex;LS
+LS33;;F8;F8;;12.06.2024;whole mosquito;no;dry;no;-80°C;no;no;0;Tap;cat food;no;80;NA;;Culex;LS
+LS34;;F6;F6;;12.06.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;131;NA;;Culex;LS
+LS35;;F6;F6;;12.06.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;63;NA;;Culex;LS
+LS36;;F6;F6;;12.06.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;137;NA;;Culex;LS
+LS37;;F6;F6;;12.06.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;131;NA;;Culex;LS
+LS39;;F9;F9;;17.06.2024;whole mosquito;no;dry;no;-80°C;no;no;0;MiliQ;cat food;no;194;NA;;Culex;LS
+LS4;;F3;F3;;06.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;149;NA;;Culex;LS
+LS40;;F3;F3;;17.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;215;NA;;Culex;LS
+LS41;;F9;F9;;17.06.2024;whole mosquito;no;dry;no;-80°C;no;no;0;MiliQ;cat food;no;188;NA;;Culex;LS
+LS42;;F6;F6;;17.06.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;191;NA;;Culex;LS
+LS43;;F4;F4;;17.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;214;NA;;Culex;LS
+LS44;;F8;F8;;17.06.2024;whole mosquito;no;dry;no;-80°C;no;no;0;Tap;cat food;no;134;NA;;Culex;LS
+LS45;;F4;F4;;17.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;229;NA;;Culex;LS
+LS46;;F5;F5;;17.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;243;NA;;Culex;LS
+LS49;;F5;F5;;17.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;199;NA;;Culex;LS
+LS5;;F4;F4;;06.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;114;NA;;Culex;LS
+LS50;;F0 2023;F0;;08.07.2024;whole mosquito;no;dry;no;-20°C;no;no;1;Arenberg;wild;no;170;NA;;Culex;LS
+LS51;;F3;F3;;08.07.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;150;NA;;Culex;LS
+LS52;;F9;F9;;08.07.2024;whole mosquito;no;dry;no;-80°C;no;no;0;MiliQ;cat food;no;136;NA;;Culex;LS
+LS53;;F6;F6;;08.07.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;128;NA;;Culex;LS
+LS55;;F6;F6;;08.07.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;153;NA;;Culex;LS
+LS56;;F9;F9;;08.07.2024;whole mosquito;no;dry;no;-80°C;no;no;0;MiliQ;cat food;no;153;NA;;Culex;LS
+LS57;;F6;F6;;08.07.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;122;NA;;Culex;LS
+LS59;;F5;F5;;08.07.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;281;NA;;Culex;LS
+LS6;;F7;F7;;10.06.2024;whole mosquito;no;PBS;no;-80°C;no;no;0;Tap;cat food;no;170;NA;;Culex;LS
+LS60;;F8;F8;;08.07.2024;whole mosquito;no;dry;no;-80°C;no;no;0;Tap;cat food;no;179;NA;;Culex;LS
+LS61;;F4;F4;;09.07.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;234;NA;;Culex;LS
+LS62;;F0 2023;F0;;09.07.2024;whole mosquito;no;dry;no;-20°C;no;no;1;Arenberg;wild;no;179;NA;;Culex;LS
+LS63;;F7;F7;;09.07.2024;whole mosquito;no;PBS;no;-80°C;no;no;0;Tap;cat food;no;66.5;NA;;Culex;LS
+LS64;;F3;F3;;09.07.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;102;NA;;Culex;LS
+LS65;;F9;F9;;09.07.2024;whole mosquito;no;dry;no;-80°C;no;no;0;MiliQ;cat food;no;122;NA;;Culex;LS
+LS66;;F7;F7;;09.07.2024;whole mosquito;no;PBS;no;-80°C;no;no;0;Tap;cat food;no;64;NA;;Culex;LS
+LS69;;F7;F7;;09.07.2024;whole mosquito;no;PBS;no;-80°C;no;no;0;Tap;cat food;no;51;NA;;Culex;LS
+LS7;;F5;F5;;10.06.2024;whole mosquito;no;PBS;no;-20°C;no;no;0.5;Arenberg;fish food, yeast and cat food;no;199;NA;;Culex;LS
+LS70;;F9;F9;;09.07.2024;whole mosquito;no;dry;no;-80°C;no;no;0;MiliQ;cat food;no;119;NA;;Culex;LS
+LS71;;NA;NA;NA;NA;whole mosquito;no;dry;no;-20°C;no;no;;;;;;;;Coquillettidia;LS_excluded
+LS73;G18;F0 2022;F0;USUV/GR-0918 (labelled as 0818);10.07.2024;only abdomen;no;homogenate;no;-20°C;no;yes;1;Arenberg;wild;yes;21;NA;;Culex;LS
+LS74;G30;F0 2022;F0;USUV/GR-1030;10.07.2024;only abdomen;no;homogenate;no;-20°C;no;yes;1;Arenberg;wild;yes;74.1;NA;;Culex;LS
+LS75;W26;F0 2022;F0;WNV-0626;10.07.2024;only abdomen;no;homogenate;no;-20°C;yes;no;1;Arenberg;wild;yes;64.2;NA;;Culex;LS
+LS76;W54;F0 2022;F0;WNV-0754;10.07.2024;only abdomen;no;homogenate;no;-20°C;yes;no;1;Arenberg;wild;yes;59.1;NA;;Culex;LS
+LS77;G20;F0 2022;F0;USUV/GR-0920 (labelled as 0820);10.07.2024;only abdomen;no;homogenate;no;-20°C;no;yes;1;Arenberg;wild;yes;59.1;NA;;Culex;LS
+LS78;W07;F0 2022;F0;WNV-0107;10.07.2024;only abdomen;no;homogenate;no;-20°C;yes;no;1;Arenberg;wild;yes;112;NA;;Culex;LS
+LS79;W50;F0 2022;F0;WNV-0750;10.07.2024;only abdomen;no;homogenate;no;-20°C;yes;no;1;Arenberg;wild;yes;72.2;NA;;Culex;LS
+LS8;;F8;F8;;10.06.2024;whole mosquito;no;dry;no;-80°C;no;no;0;Tap;cat food;no;183;NA;;Culex;LS
+LS80;G42;F0 2022;F0;USUV/GR-1142;10.07.2024;only abdomen;no;homogenate;no;-20°C;no;yes;1;Arenberg;wild;yes;74.7;NA;;Culex;LS
+LS81;W34;F0 2022;F0;WNV-0734;10.07.2024;only abdomen;no;homogenate;no;-20°C;yes;no;1;Arenberg;wild;yes;123;NA;;Culex;LS
+LS82;G28;F0 2022;F0;USUV/GR-1028;10.07.2024;only abdomen;no;homogenate;no;-20°C;no;yes;1;Arenberg;wild;yes;39.3;NA;;Culex;LS
+LS83;W39;F0 2022;F0;WNV-0739;10.07.2024;only abdomen;no;homogenate;no;-20°C;yes;no;1;Arenberg;wild;yes;57.6;NA;;Culex;LS
+LS9;;F6;F6;;10.06.2024;whole mosquito;no;dry;yes;-20°C;no;no;0.2;Arenberg;fish food, yeast or cat food;no;148;NA;;Culex;LS
+LSNIC1;;;;;06.06.2024;;yes;;;;;;;;;;1.7;NA;;;LS
+LSNIC2;;;;;10.06.2024;;yes;;;;;;;;;;1.11;NA;;;LS
+LSNIC3;;;;;11.06.2024;;yes;;;;;;;;;;1.84;NA;;;LS
+LSNIC7;;;;;09.07.2024;;yes;;;;;;;;;;1.11;NA;;;LS
+Antib1;;;;P/S 1;;;no;;;;;;;;;;;yes;;;Antibiotics
+Antib2;;;;P/S 2;;;no;;;;;;;;;;;yes;;;Antibiotics
+Antib3;;;;P/S 3;;;no;;;;;;;;;;;yes;;;Antibiotics
+Antib4;;;;P/S 4;;;no;;;;;;;;;;;yes;;;Antibiotics
+Antib5;;;;P/S 5;;;no;;;;;;;;;;;yes;;;Antibiotics
+Antib6;;;;P/S 6;;;no;;;;;;;;;;;yes;;;Antibiotics
+Antib7;;;;P/S 7;;;no;;;;;;;;;;;yes;;;Antibiotics
+Antib8;;;;C 1;;;no;;;;;;;;;;;no;;;Antibiotics
+Antib9;;;;C 2;;;no;;;;;;;;;;;no;;;Antibiotics
+Antib10;;;;C 3;;;no;;;;;;;;;;;no;;;Antibiotics
+Antib11;;;;C 4;;;no;;;;;;;;;;;no;;;Antibiotics
+Antib12;;;;C 5;;;no;;;;;;;;;;;no;;;Antibiotics
+Antib13;;;;C 6;;;no;;;;;;;;;;;no;;;Antibiotics
+Antib14;;;;C 7;;;no;;;;;;;;;;;no;;;Antibiotics
+Antib15;;;;NC1;;;yes;;;;;;;;;;;;;;Antibiotics
+Antib16;;;;NC2;;;yes;;;;;;;;;;;;;;Antibiotics
+Antib17;;;;NC3;;;yes;;;;;;;;;;;;;;Antibiotics
+Bact1;;;;Cx-L 1;;;no;;;;;;;;;;;;Lab;Culex;Bacteriome
+Bact2;;;;Cx-L 2;;;no;;;;;;;;;;;;Lab;Culex;Bacteriome
+Bact3;;;;Cx-L 3;;;no;;;;;;;;;;;;Lab;Culex;Bacteriome
+Bact4;;;;Cx-Wt 1;;;no;;;;;;;;;;;;Wildtype;Culex;Bacteriome
+Bact5;;;;Cx-Wt 2;;;no;;;;;;;;;;;;Wildtype;Culex;Bacteriome
+Bact6;;;;Cx-Wt 3;;;no;;;;;;;;;;;;Wildtype;Culex;Bacteriome
+Bact7;;;;Ae-L 1;;;no;;;;;;;;;;;;Lab;Aedes;Bacteriome
+Bact8;;;;Ae-L 2;;;no;;;;;;;;;;;;Lab;Aedes;Bacteriome
+Bact9;;;;Ae-L 3;;;no;;;;;;;;;;;;Lab;Aedes;Bacteriome
+Bact10;;;;Ae-Wt 1;;;no;;;;;;;;;;;;Wildtype;Aedes;Bacteriome
+Bact11;;;;Ae-Wt 2;;;no;;;;;;;;;;;;Wildtype;Aedes;Bacteriome
+Bact12;;;;Ae-Wt 3;;;no;;;;;;;;;;;;Wildtype;Aedes;Bacteriome
+Bact13;;;;NC 1;;;yes;;;;;;;;;;;;;;
+Bact14;;;;NC 2;;;yes;;;;;;;;;;;;;;
+Bact15;;;;NC 3;;;yes;;;;;;;;;;;;;;
+BactNIC;;;;NIC;;;yes;;;;;;;;;;;;;;

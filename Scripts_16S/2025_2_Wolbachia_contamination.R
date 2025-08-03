@@ -1,6 +1,10 @@
 
-load("16S_all_50GTDB.RData")
+#load("16S_all_50GTDB.RData")
+load("16S_data_all/16S_all_50GTDB.RData")
 
+
+library(phyloseq)
+library(ggplot2)
 
 #plot Wolbachia across all samples sequenced together
 ps_genus <- tax_glom(ps, taxrank = "Genus")
@@ -16,8 +20,6 @@ ggplot(df, aes(x = Sample, y = Abundance, fill = Experiment)) +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
 
-library(phyloseq)
-library(ggplot2)
 
 # 1. Agglomerate at Genus level
 
@@ -48,10 +50,10 @@ ggplot(df, aes(x = Sample, y = Abundance, fill = GenusLabel)) +
 #relative abundance: 
 
 # Transform to relative abundance
-ps_rel <- transform_sample_counts(ps_genus, function(x) x / sum(x))
+ps_relative <- transform_sample_counts(ps_genus, function(x) x / sum(x))
 
 # Melt
-df_rel <- psmelt(ps_rel)
+df_rel <- psmelt(ps_relative)
 
 # Plot
 ggplot(df_rel, aes(x = Sample, y = Abundance, fill = GenusLabel)) +

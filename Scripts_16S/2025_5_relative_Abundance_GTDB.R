@@ -9,7 +9,7 @@ library(ggtext)
 library(ggalluvial)
 library(patchwork)
 
-#source("2_alpha_beta_diversity.R")
+#source("2025_4_alpha_beta_diversity.R")
 
 #' Custom legend plot function
 addSmallLegend <- function(myPlot, pointSize = 0.75, textSize = 6, spaceLegend = 0.1) {
@@ -217,6 +217,8 @@ rel_ab_plot
 #ggsave("Plots/relative_abundance_unclassified_50_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
 #ggsave("Plots/relative_abundance_unclassified_50_samplesExcl10_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
 
+ggsave("Plots_16S/relative_abundance_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
+
 
 # Create Pseudomonadota plot
 
@@ -294,54 +296,9 @@ p2
 #ggsave("Plots/relative_abundance_pseudomonadota_GTDB_unclassified_50_samplesExcl_wWB.png", dpi = 300, width = 170, height = 120, units = "mm")
 #ggsave("Plots/relative_abundance_pseudomonadota_GTDB_unclassified_50_samplesExcl_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
 #ggsave("Plots/relative_abundance_pseudomonadota_GTDB_unclassified_50_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
-ggsave("Plots/relative_abundance_pseudomonadota_GTDB_unclassified_50_samplesExcl10_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
+#ggsave("Plots/relative_abundance_pseudomonadota_GTDB_unclassified_50_samplesExcl10_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
+
+ggsave("Plots_16S/relative_abundance_pseudomonadota_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
 
 
 
-
-
-
-library(tidyverse)
-library(ggplot2)
-library(ggh4x)  # falls du facet_nested brauchst
-# ggnested ggf. separat laden
-
-# Filtere nur Enterobacteriaceae
-rel_abundance_enterobacter <- rel_abundance_df |>
-  filter(Family == "<i>Enterobacteriaceae</i>") |>
-  mutate(
-    Genus = if_else(is.na(Genus) | Genus == "", "unclassified", Genus)
-  )
-
-# Optional: Levels setzen, um Ordnung zu behalten (z. B. häufigste zuerst)
-top_genera <- rel_abundance_enterobacter |>
-  group_by(Genus) |>
-  summarise(total_abundance = sum(F_Abundance, na.rm = TRUE)) |>
-  arrange(desc(total_abundance)) |>
-  pull(Genus)
-
-rel_abundance_enterobacter$Genus <- factor(rel_abundance_enterobacter$Genus, levels = top_genera)
-rel_abundance_enterobacter <- rel_abundance_df |>
-  filter(Family == "<i>Enterobacteriaceae</i>", !is.na(Generation), !is.na(F_Abundance), !is.na(Genus)) |>
-  mutate(
-    Genus = if_else(Genus == "", "unclassified", Genus)
-  )
-
-
-# Einfacher ggplot
-p_genus <- ggplot(rel_abundance_enterobacter, aes(x = Sample, y = F_Abundance, fill = Genus)) +
-  geom_bar(stat = "identity") +
-  facet_wrap(~Generation, scales = "free_x") +
-  scale_y_continuous(limits = c(0, 100), expand = c(0, 0.1)) +
-  labs(y = "Relative abundance (%)", x = NULL) +
-  theme_classic() +
-  theme(
-    legend.position = "bottom",
-    axis.text.x = element_blank(),
-    axis.ticks.x = element_blank(),
-    axis.text.y = element_text(size = 6),
-    legend.text = element_text(size = 6),
-    legend.key.size = unit(0.3, "cm")
-  )
-
-p_genus

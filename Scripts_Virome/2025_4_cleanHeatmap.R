@@ -2,9 +2,10 @@
 
 library(paletteer)
 library(ggthemes)
+library(patchwork)
 
-here::i_am("2025_4_cleanHeatmap.R")
-source("2025_2_alpha_diversity.R")
+here::i_am("Scripts_Virome/2025_4_cleanHeatmap.R")
+source("Scripts_Virome/2025_2_alpha_diversity.R")
 
 #get my OTUs as relative abundances instead:
 otu_rel_abundance <- as(otu_table(phyloseq), "matrix")
@@ -132,9 +133,6 @@ OTU_tidy <- OTU_tidy %>%
 
 
 #add meta
-
-
-
 OTU_tidy <- OTU_tidy %>%
   left_join(meta, by = "Sample") 
 
@@ -193,9 +191,8 @@ generation_bar <- ggplot(OTU_tidy, aes(x = Sample, y = 1, fill = Generation)) +
 
 # Combine with patchwork
 combined_plot <- (main_heatmap / generation_bar) + 
-  plot_layout(heights = c(1, 0.05), guides = "collect") &
+  plot_layout(heights = c(1, 0.05), guides = "collect") & 
   theme(legend.position = "right")
-
 combined_plot
 
 ggsave("Plots_Virome/Heatmap_palmprint_generation_XYadj.png", dpi = 300, width = 280, height = 150, units = "mm")

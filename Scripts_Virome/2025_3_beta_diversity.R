@@ -1,7 +1,7 @@
 ### Beta diversity ###
 
 # Determine location
-here::i_am("2025_3_beta_diversity.R")
+here::i_am("Scripts_Virome/2025_3_beta_diversity.R")
 
 source("2025_2_alpha_diversity.R")
 
@@ -92,7 +92,7 @@ for (Factor in Factors) {
   
   # Save the table with dynamic filename
   write.table(results, 
-              file = paste0("Results/", Project, "_", Factor, "_significance_difference_centroids.tsv"), 
+              file = paste0("Results_Virome/", Project, "_", Factor, "_significance_difference_centroids.tsv"), 
               sep = "\t", 
               row.names = TRUE)
 }

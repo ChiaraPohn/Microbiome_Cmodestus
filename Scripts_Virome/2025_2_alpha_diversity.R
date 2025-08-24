@@ -7,18 +7,18 @@ library(ggpubr)
 
 
 # Determine location
-here::i_am("2025_2_alpha_diversity.R")
+here::i_am("Scripts_Virome/2025_2_alpha_diversity.R")
 
 #change depending on which dataset, factor etc. I am looking at:
-loaded_data <- "2025_1_load_data.R" 
+loaded_data <- "Plots_Virome/2025_1_load_data.R" 
 #loaded_data <- "Project, "_", Database, ".RData"
 phyloseq <- ps.V2
 #phyloseq <- ps
 Factors <- c("Generation", "Generation_combinedF0")
-Project <- "LS_virome" 
+Project <- "LS_virome_XY_adj" 
 #Project <- "LS_Cmodestus2025_16S_bac"
 
-#source(loaded_data)
+source(loaded_data)
 meta <- data.frame(sample_data(phyloseq))
 
 # Create custom rarefaction function

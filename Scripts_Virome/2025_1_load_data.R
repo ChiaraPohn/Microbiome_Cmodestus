@@ -19,7 +19,7 @@ library(phyloseq)
 library(decontam)
 
 # Determine location
-here::i_am("2025_1_load_data.R")
+here::i_am("Scripts_Virome/2025_1_load_data.R")
 
 #paths to my tables
 abundance_table <- "Tables_Virome/LS_abundance_1000.tsv"

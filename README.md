@@ -10,6 +10,7 @@ This is a workflow including HPC analyses of Illumina sequencing reads for viral
 ViPER Pipeline (https://github.com/Matthijnssenslab/ViPER) for processing paired-end Illumina reads - this includes deduplexing, trimming (Trimmomatic), assembly (metaSPAdes), as well as mapping reads to contigs (bwa-mem2) and classification (DIAMOND, KronaTools). Viruses are checked for completeness via checkV. 
 
 The output from this pipeline (abundance tables, taxonomy tables, completeness tables) is further analyzed in R (folder: Scripts_Virome). 
+
 1: output from the ViPER pipeline is loaded into R, contigs are filtered according to completeness and contaminations removed based on negative controls using the decontam package. 
 
 

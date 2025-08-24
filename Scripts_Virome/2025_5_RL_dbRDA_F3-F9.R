@@ -1,7 +1,9 @@
+### what drives the difference between lab generations?
+
 # Determine location
 here::i_am("Scripts_Virome/2025_5_RL_dbRDA.R")
 
-source("2025_3_beta_diversity.R")
+source("Scripts_Virome/2025_3_beta_diversity.R")
 #renv::install("raeslab/RLdbRDA")
 library(RLdbRDA)
 
@@ -16,7 +18,7 @@ meta_df <- as.data.frame(meta_matrix)
 
 #unlist cleaned up file: 
 columns <- c("Generation", "Body.part", "Condition", "Fragmented", "Storage", "WNV", 
-             "USUV", "Water.", "Bloodmeal", "Food_larvae")
+             "USUV", "Water.", "Bloodmeal", "Food_larvae", "Origin")
 
 meta_df[columns] <- lapply(meta_df[columns], as.factor)
 
@@ -34,7 +36,7 @@ meta_df2 <- meta_df2 %>%
 
 
 #custom using matrix from beta diversity
-source("custom_dbrda.R")
+source("Scripts_Virome/custom_dbrda.R")
 
 # Calculate beta diversity when excluding F0s
 withF0 <- vegan_avgdist
@@ -44,18 +46,17 @@ withoutF0 <- vegan::avgdist(as.data.frame(t(otu_table(ps.V2_F3to9))),
 
 #rldbrda for only statistically significant factors with F0:
 
-out <- custom_rldbrda(withF0, meta_df2, p_cutoff = 0.5)
-out
+#out <- custom_rldbrda(withF0, meta_df2, p_cutoff = 0.5)
+#out
 
-plot_data <- RLdbRDA::prepare_plot_data(out)
-plot_data
+#plot_data <- RLdbRDA::prepare_plot_data(out)
+#plot_data
 
-g <- RLdbRDA::plot_dbrda(plot_data)
-g
+#g <- RLdbRDA::plot_dbrda(plot_data)
+#g
 
-ggsave("Plots/2025LS_RL_dbR_wF0.png", dpi = 300, width = 250, height = 120, units = "mm")
+#ggsave("Plots/2025LS_RL_dbR_wF0.png", dpi = 300, width = 250, height = 120, units = "mm")
 
-#rldbrda for only statistically significant factors without F0:
 
 #remove irrelevant columns and samples
 meta_df3 <- meta_df2 %>%

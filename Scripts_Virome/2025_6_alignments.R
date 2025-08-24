@@ -1,7 +1,7 @@
-### Alignments contigs ###
+### Aligning contigs assigned to the two most prevalent viruses ###
 
 # Determine location
-here::i_am("2025_7_alignments.R")
+here::i_am("2025_6_alignments.R")
 
 library(tidyverse)
 library(patchwork)
@@ -17,8 +17,8 @@ library(readr)
 
 # Named vector for virus names and file paths
 virus_files <- c(
-  picornalike = "picorna_like_blastn_header.tsv", 
-  totilike    = "toti_like_blastn_header.tsv")
+  picornalike = "Tables_Virome/picorna_like_blastn_header.tsv", 
+  totilike    = "Tables_Virome/toti_like_blastn_header.tsv")
 
 # Loop over the named vector
 for (virus in names(virus_files)) {
@@ -61,7 +61,7 @@ for (virus in names(virus_files)) {
   p
   # Save plot
   ggsave(
-    filename = paste0("Plots/2025_Alignment_", virus, "_contigs.png"),
+    filename = paste0("Plots_Virome/2025_Alignment_", virus, "_contigs.png"),
     plot = p,
     dpi = 300, width = 250, height = 250, units = "mm"
   )

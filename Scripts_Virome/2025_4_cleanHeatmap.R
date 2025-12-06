@@ -7,6 +7,23 @@ library(patchwork)
 here::i_am("Scripts_Virome/2025_4_cleanHeatmap.R")
 source("Scripts_Virome/2025_2_alpha_diversity.R")
 
+#number of total reads for my contigs of interest:
+selected_otus <- c("NODE_A1_length_10358_cov_1043.127711_W54", 
+                   "NODE_A1_length_9685_cov_312.741153_W50", 
+                   "NODE_A2_length_6321_cov_434.172165_LS72", 
+                   "NODE_A31_length_1757_cov_2823.019643_G28",
+                   "NODE_A1_length_11032_cov_3358.452670_W34", 
+                   "NODE_A1_length_7154_cov_76.883284_LS63", 
+                   "NODE_A1_length_9715_cov_66.678149_LS33", 
+                   "NODE_A2_length_7099_cov_245.671176_W34", 
+                   "NODE_A13_length_3436_cov_154.678773_W39", 
+                   "NODE_B2_length_5021_cov_122.489280_W34")
+
+otus_all <- otu_table(phyloseq)
+sum_reads <- rowSums(otus_all[selected_otus, ])
+View(sum_reads)
+
+
 #get my OTUs as relative abundances instead:
 otu_rel_abundance <- as(otu_table(phyloseq), "matrix")
 

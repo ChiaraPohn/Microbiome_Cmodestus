@@ -217,7 +217,7 @@ rel_ab_plot
 #ggsave("Plots/relative_abundance_unclassified_50_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
 #ggsave("Plots/relative_abundance_unclassified_50_samplesExcl10_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
 
-ggsave("Plots_16S/relative_abundance_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
+ggsave("Plots_16S/relative_abundance_noWB_decontam0.2.png", dpi = 300, width = 170, height = 120, units = "mm")
 
 
 # Create Pseudomonadota plot
@@ -298,7 +298,7 @@ p2
 #ggsave("Plots/relative_abundance_pseudomonadota_GTDB_unclassified_50_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
 #ggsave("Plots/relative_abundance_pseudomonadota_GTDB_unclassified_50_samplesExcl10_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
 
-ggsave("Plots_16S/relative_abundance_pseudomonadota_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
+ggsave("Plots_16S/relative_abundance_pseudomonadota_noWB_decontam0.2.png", dpi = 300, width = 170, height = 120, units = "mm")
 
 
 

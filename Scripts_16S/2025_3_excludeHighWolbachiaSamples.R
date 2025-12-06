@@ -1,4 +1,4 @@
-load("16S_all_50GTDB.RData")
+#load("16S_all_50GTDB.RData")
 
 ps <- subset_samples(ps, Experiment == "LS")
 
@@ -38,6 +38,6 @@ samples_to_exclude <- rownames(prevalence_wolbachia_rel_sample_high)
 ps_excluded <- subset_samples(ps, !(sample_names(ps) %in% samples_to_exclude))
 
 #now exclude Wolbachia reads and/or highly contaminated samples
-#ps <- ps_excluded
+ps <- ps_excluded
 ps <- subset_taxa(ps, Genus != "Wolbachia")
-
+ps

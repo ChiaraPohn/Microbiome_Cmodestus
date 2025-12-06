@@ -5,7 +5,7 @@ library(ggpubr)
 library(ggplot2)
 library(dplyr)
 
-Project <- "LS_16S"
+Project <- "LS_16S_decontam0.2"
 Factor <- "Generation"
 
 #load("LS_Cmodestus_16S_SILVA.RData")

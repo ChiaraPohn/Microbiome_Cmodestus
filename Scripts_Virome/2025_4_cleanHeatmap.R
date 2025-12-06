@@ -52,7 +52,7 @@ new_otu_names <- c("NODE_A13_length_3436_cov_154.678773_W39" = "Broome luteo-lik
                    "NODE_A33_length_1783_cov_70.613716_W50" =  "Unclassified Circovirus", 
                    "NODE_A1_length_5920_cov_121.301557_LS_NIC4" = "Unclassified Microvirus",
                    "NODE_A31_length_1757_cov_2823.019643_G28" = "Sonnbo virus", 
-                   "NODE_B2_length_5021_cov_122.489280_W34" = "Hubei mosquito virus 4")
+                   "NODE_B2_length_5021_cov_122.489280_W34" = "Tombusviridae sp.")
 
 # Rename OTUs
 OTU_tidy <- OTU_tidy %>%
@@ -125,7 +125,7 @@ new_otu_names <- c("NODE_A13_length_3436_cov_154.678773_W39" = "Broome luteo-lik
                    "NODE_A2_length_6321_cov_434.172165_LS72" = "Culex inatomii totivirus",
                    "NODE_A2_length_7099_cov_245.671176_W34" = "CmLeuv toti-like virus W34", 
                     "NODE_A31_length_1757_cov_2823.019643_G28" = "Sonnbo virus", 
-                   "NODE_B2_length_5021_cov_122.489280_W34" = "Hubei mosquito virus 4")
+                   "NODE_B2_length_5021_cov_122.489280_W34" = "Tombusviridae sp.")
 
 # Rename OTUs
 OTU_tidy <- OTU_tidy %>%

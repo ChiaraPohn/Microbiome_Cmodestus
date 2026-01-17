@@ -1,7 +1,7 @@
 
 #load("16S_all_50GTDB.RData")
 #load("16S_data_all/16S_all_50GTDB.RData")
-#load("16S_all_50GTDBsensitivedecontam.RData")
+load("16S_all_50GTDBsensitivedecontam.RData")
 
 
 library(phyloseq)

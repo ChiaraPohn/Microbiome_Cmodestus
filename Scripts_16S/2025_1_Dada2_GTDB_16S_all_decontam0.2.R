@@ -9,6 +9,13 @@
 
 #install.packages("devtools") 
 
+renv::init()
+install.packages("renv")
+
+# run regularily: 
+renv::snapshot()
+renv::status()
+
 library("devtools")
 
 library(dada2)

@@ -64,6 +64,7 @@ alpha <- alpha_average_df %>%
   ) %>%
   ggplot(aes(x = Generation, y = Diversity, color = Generation)) +
   geom_boxplot(outlier.shape = NA) +
+  ggtitle(Heading, "Alpha diversity")+
   geom_jitter(width = 0.2) +
   facet_wrap(~Metric, nrow = 1, scales = "free_y") +
   theme_bw() +
@@ -128,8 +129,19 @@ ggsave(paste0("Plots_16S/", Project, "_", Database,"_BetaDiversity_", Factor, ".
 meta_matrix <- as.matrix(sample_data(ps))
 meta_df <- as.data.frame(meta_matrix)
 
-adonis2(vegan_avgdist ~ Generation, data = meta_df, method='eu')
+set.seed(123)
+#adonis2(vegan_avgdist ~ Generation, data = meta_df, method='eu')
 
 adonis_result <- adonis2(vegan_avgdist ~ Generation, data = meta_df, permutations = 999)
 
 print(adonis_result)
+
+#can i find out which generations are driving this?
+
+pairwise_results <- pairwise.adonis(vegan_avgdist, meta_df[[Factor]], p.adjust.m = "BH")
+
+significant_results <- pairwise_results[pairwise_results$p.adj < 0.05, ]
+# Print only significant results
+print(significant_results)
+
+results <- as.data.frame(pairwise_results)

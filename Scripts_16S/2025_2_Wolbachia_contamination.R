@@ -48,6 +48,28 @@ ggplot(df, aes(x = Sample, y = Abundance, fill = GenusLabel)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 
+library(ggnewscale)
+
+ggplot(df, aes(x = Sample, y = Abundance, fill = GenusLabel)) +
+  geom_bar(stat = "identity", position = "stack") +
+  ggnewscale::new_scale_fill() +
+  geom_rect(
+    aes(xmin = as.numeric(Sample) - 0.5, xmax = as.numeric(Sample) + 0.5,
+      ymin = -0.05 * max(Abundance),ymax = 0, fill = Experiment),
+    inherit.aes = FALSE
+  ) +
+  labs(title = "Wolbachia vs Other Reads per Sample",y = "Read Count",x = "Sample") +
+  theme_minimal() +
+  theme(
+    axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+    plot.margin = margin(5.5, 5.5, 25, 5.5)
+  ) +
+  scale_y_continuous(expand = expansion(mult = c(0.12, 0.05))) +
+  coord_cartesian(clip = "off")
+
+ggsave("Plots_16S/WolbachiaReads_allExperiments.png", dpi = 300, width = 180, height = 120, units = "mm")
+
+
 #relative abundance: 
 
 # Transform to relative abundance

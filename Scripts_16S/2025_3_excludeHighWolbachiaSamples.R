@@ -1,5 +1,6 @@
 #load("16S_all_50GTDB.RData")
 
+source("Scripts_16S/2025_2_Wolbachia_contamination.R")
 ps <- subset_samples(ps, Experiment == "LS")
 
 

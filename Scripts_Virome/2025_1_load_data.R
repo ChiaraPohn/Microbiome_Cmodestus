@@ -155,3 +155,16 @@ ps.V2
 #only F3 to F9
 ps.V2_F3to9 <- subset_samples(ps.V2, Generation_combinedF0 != "F0")
 
+#only contigs confirmed by RdRp presence: 
+
+selected_otus <- c("NODE_A1_length_10358_cov_1043.127711_W54", 
+                   "NODE_A1_length_9685_cov_312.741153_W50", 
+                   "NODE_A2_length_6321_cov_434.172165_LS72", 
+                   "NODE_A31_length_1757_cov_2823.019643_G28",
+                   "NODE_A1_length_11032_cov_3358.452670_W34", 
+                   "NODE_A1_length_7154_cov_76.883284_LS63", 
+                   "NODE_A1_length_9715_cov_66.678149_LS33", 
+                   "NODE_A2_length_7099_cov_245.671176_W34", 
+                   "NODE_A13_length_3436_cov_154.678773_W39", 
+                   "NODE_B2_length_5021_cov_122.489280_W34")
+ps_rdrdp <- prune_taxa(selected_otus, ps.V2)

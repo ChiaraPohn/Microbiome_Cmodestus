@@ -13,6 +13,7 @@ library(dplyr)
 library(devtools)
 devtools::install_github("pmartinezarbizu/pairwiseAdonis/pairwiseAdonis")
 library(pairwiseAdonis)
+library(cluster)
 
 # Calculate beta diversity
 vegan_avgdist <- vegan::avgdist(as.data.frame(t(otu_table(phyloseq))), 

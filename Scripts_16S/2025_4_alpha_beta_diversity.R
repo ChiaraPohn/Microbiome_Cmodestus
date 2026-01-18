@@ -7,11 +7,12 @@ library(dplyr)
 
 Project <- "LS_16S_decontam0.2"
 Factor <- "Generation"
+Heading <- "Bacteriome"
 
 #load("LS_Cmodestus_16S_SILVA.RData")
 #or
-#load("16S_all_50GTDB.RData")
-#source("2025_3_excludeHighWolbachiaSamples.R")
+load("16S_all_50GTDB.RData")
+source("2025_3_excludeHighWolbachiaSamples.R")
 
 alpha_rarefied <- function(ab_table, sequencing_depth) {
   df <- ab_table %>%
@@ -43,7 +44,7 @@ min_depth <- df %>%
 
 ggplot(data = df, aes(x = LibrarySize, y = "samples")) +
   geom_jitter(height = 0.02) +
-  ggtitle("Library sizes") +
+  ggtitle(Heading,"Library sizes") +
   geom_vline(xintercept = min_depth, linetype = "dashed", color = "grey") +
   labs(y = "") +
   # scale_x_log10()+
@@ -115,7 +116,7 @@ centroids <- pcoa_data %>%
 # Add centroids to the plot
 pcoa2 <- pcoa + 
   geom_point(data = centroids, aes(x = Centroid_Axis1, y = Centroid_Axis2, color=Generation), shape=13, size=4) +
-  ggtitle("PCoA Beta Diversity by Generation")
+  ggtitle(Heading, "PCoA Beta Diversity by Generation")
 
 pcoa2
 

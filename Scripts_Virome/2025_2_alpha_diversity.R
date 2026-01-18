@@ -10,13 +10,16 @@ library(ggpubr)
 here::i_am("Scripts_Virome/2025_2_alpha_diversity.R")
 
 #change depending on which dataset, factor etc. I am looking at:
-loaded_data <- "Plots_Virome/2025_1_load_data.R" 
+loaded_data <- "Scripts_Virome/2025_1_load_data.R" 
 #loaded_data <- "Project, "_", Database, ".RData"
 phyloseq <- ps.V2
+#phyloseq <- ps_rdrdp
 #phyloseq <- ps
 Factors <- c("Generation", "Generation_combinedF0")
-Project <- "LS_virome_XY_adj" 
+Project <- "LS_virome_XY_adj"
+Project <- "LS_virome_rdrp"
 #Project <- "LS_Cmodestus2025_16S_bac"
+Heading <- "Virome Palmprint" # "Bacteriome"
 
 source(loaded_data)
 meta <- data.frame(sample_data(phyloseq))
@@ -52,7 +55,7 @@ min_depth <- df %>%
 
 ggplot(data=df, aes(x=LibrarySize, y="samples")) + 
   geom_jitter(height = 0.02)+
-  ggtitle("Library sizes")+
+  ggtitle(Heading, "Library sizes")+
   geom_vline(xintercept = min_depth, linetype="dashed", color="grey")+
   labs(y="")+
   scale_x_log10()+

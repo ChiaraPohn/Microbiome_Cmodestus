@@ -20,7 +20,7 @@ ggplot(df, aes(x = Sample, y = Abundance, fill = Experiment)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
 
-
+sum_reads <- as.data.frame(sample_sums(ps_wolbachia))
 
 # 1. Agglomerate at Genus level
 
@@ -67,7 +67,7 @@ ggplot(df, aes(x = Sample, y = Abundance, fill = GenusLabel)) +
   scale_y_continuous(expand = expansion(mult = c(0.12, 0.05))) +
   coord_cartesian(clip = "off")
 
-ggsave("Plots_16S/WolbachiaReads_allExperiments.png", dpi = 300, width = 180, height = 120, units = "mm")
+ggsave("Plots_16S/WolbachiaReads_allExperiments.png", dpi = 300, width = 200, height = 100, units = "mm")
 
 
 #relative abundance: 

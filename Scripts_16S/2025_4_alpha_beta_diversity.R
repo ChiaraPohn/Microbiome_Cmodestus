@@ -97,8 +97,8 @@ v.ord <- ape::pcoa(vegan_avgdist)
 pcoa <- plot_ordination(ps, v.ord, type="samples", color="Generation", axes = c(1, 2))+
   stat_ellipse(type = "norm", linetype = 2, aes_string(group="Generation"), size=0.7, show.legend = F)+
   geom_point(size=2) +
-theme_bw() +
-scale_color_viridis_d(begin=0, end =.9, name="")
+theme_bw()# +
+#scale_color_viridis_d(begin=0, end =.9, name="")
 
 pcoa
 

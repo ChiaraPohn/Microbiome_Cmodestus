@@ -142,3 +142,6 @@ ggplot(OTU_tidy, aes(x = Sample, y = OTU, fill = Abundance)) +
     axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 6, color = "black")
   )
 
+ps_merged <- merge_phyloseq(ps_USUV_V2, ps.V2)
+ps_merged
+

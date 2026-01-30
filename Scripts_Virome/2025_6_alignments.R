@@ -1,7 +1,7 @@
 ### Aligning contigs assigned to the two most prevalent viruses ###
 
 # Determine location
-here::i_am("2025_6_alignments.R")
+here::i_am("Scripts_Virome/2025_6_alignments.R")
 
 library(tidyverse)
 library(patchwork)

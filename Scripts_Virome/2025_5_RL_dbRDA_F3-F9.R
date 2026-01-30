@@ -1,7 +1,7 @@
 ### what drives the difference between lab generations?
 
 # Determine location
-here::i_am("Scripts_Virome/2025_5_RL_dbRDA.R")
+here::i_am("Scripts_Virome/2025_5_RL_dbRDA_F3-F9.R")
 
 source("Scripts_Virome/2025_3_beta_diversity.R")
 #renv::install("raeslab/RLdbRDA")
@@ -72,4 +72,4 @@ plot_data
 g <- RLdbRDA::plot_dbrda(plot_data)
 g
 
-ggsave("Plots/LS_RL_dbR_woF0.png", dpi = 300, width = 250, height = 120, units = "mm")
+ggsave("Plots_Virome/LS_RL_dbR_woF0.png", dpi = 300, width = 250, height = 120, units = "mm")

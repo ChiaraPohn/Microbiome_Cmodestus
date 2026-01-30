@@ -21,7 +21,7 @@ selected_otus <- c("NODE_A1_length_10358_cov_1043.127711_W54",
 
 otus_all <- otu_table(phyloseq)
 sum_reads <- rowSums(otus_all[selected_otus, ])
-View(sum_reads)
+sum_reads
 
 
 #get my OTUs as relative abundances instead:

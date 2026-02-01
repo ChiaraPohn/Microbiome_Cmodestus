@@ -15,6 +15,7 @@ library(stringr)
 library(ggplot2)
 library(readr)
 
+
 # Named vector for virus names and file paths
 virus_files <- c(
   picornalike = "Tables_Virome/picorna_like_blastn_header.tsv", 
@@ -42,6 +43,11 @@ for (virus in names(virus_files)) {
     add_row(qseqid = "Hit", sstart = 1, send = max(blastn_header$qlength, na.rm = TRUE)) %>%
     slice(c(n(), 1:(n() - 1))) %>%
     mutate(qseqid = factor(qseqid, levels = rev(unique(qseqid))))
+  
+  #save file in case i want to check something
+  write.csv(plot_data,
+    file = paste0("Tables_Virome/PercentID_", virus, ".csv"),
+    row.names = FALSE)
   
   # Create the plot
   p <- ggplot(plot_data, aes(x = sstart, xend = send, y = qseqid, yend = qseqid, fill = pident)) +

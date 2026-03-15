@@ -9,7 +9,7 @@ library(ggtext)
 library(ggalluvial)
 library(patchwork)
 
-source("2025_4_alpha_beta_diversity.R")
+#source("2025_4_alpha_beta_diversity.R")
 
 #' Custom legend plot function
 addSmallLegend <- function(myPlot, pointSize = 0.75, textSize = 6, spaceLegend = 0.1) {
@@ -211,13 +211,9 @@ rel_ab_plot <- addSmallLegend(p, spaceLegend = .5) +
 
 rel_ab_plot
 
-#ggsave("Plots/relative_abundance_unclassified_50_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
-#ggsave("Plots/relative_abundance_unclassified_50_samplesExcl_wWB.png", dpi = 300, width = 170, height = 120, units = "mm")
-#ggsave("Plots/relative_abundance_unclassified_50_samplesExcl_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
-#ggsave("Plots/relative_abundance_unclassified_50_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
-#ggsave("Plots/relative_abundance_unclassified_50_samplesExcl10_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
+#ggsave("Plots_16S/relative_abundance_noWB_decontam0.2.png", dpi = 300, width = 170, height = 120, units = "mm")
 
-ggsave("Plots_16S/relative_abundance_noWB_decontam0.2.png", dpi = 300, width = 170, height = 120, units = "mm")
+ggsave("Plots_16S/relative_abundance_noWB_decontam0.6.png", dpi = 300, width = 170, height = 120, units = "mm")
 
 
 # Create Pseudomonadota plot
@@ -292,13 +288,9 @@ rel_ab_proteo_plot <- addSmallLegend(p2, spaceLegend = .5, pointSize = .5, textS
   )
 p2
 
-#ggsave("Plots/relative_abundance_pseudomonadota_GTDB_unclassified_50_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
-#ggsave("Plots/relative_abundance_pseudomonadota_GTDB_unclassified_50_samplesExcl_wWB.png", dpi = 300, width = 170, height = 120, units = "mm")
-#ggsave("Plots/relative_abundance_pseudomonadota_GTDB_unclassified_50_samplesExcl_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
-#ggsave("Plots/relative_abundance_pseudomonadota_GTDB_unclassified_50_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
-#ggsave("Plots/relative_abundance_pseudomonadota_GTDB_unclassified_50_samplesExcl10_noWB.png", dpi = 300, width = 170, height = 120, units = "mm")
+#ggsave("Plots_16S/relative_abundance_pseudomonadota_noWB_decontam0.2.png", dpi = 300, width = 170, height = 120, units = "mm")
 
-ggsave("Plots_16S/relative_abundance_pseudomonadota_noWB_decontam0.2.png", dpi = 300, width = 170, height = 120, units = "mm")
+ggsave("Plots_16S/relative_abundance_pseudomonadota_noWB_decontam0.6.png", dpi = 300, width = 170, height = 120, units = "mm")
 
 
 

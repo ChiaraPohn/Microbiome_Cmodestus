@@ -19,6 +19,8 @@ ggplot(df, aes(x = Sample, y = Abundance, fill = Experiment)) +
   labs(title = "Wolbachia Reads per Sample", y = "Read Count", x = "Sample") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
+ggsave(paste0("Plots_16S/Wolbachiareadcounts_allProjects.png"), dpi = 300, width = 200, height = 120, units = "mm")
+
 
 sum_reads <- as.data.frame(sample_sums(ps_wolbachia))
 
@@ -50,8 +52,10 @@ ggplot(df, aes(x = Sample, y = Abundance, fill = GenusLabel)) +
 
 library(ggnewscale)
 
+genus_cols <- c("Wolbachia" = "darkblue", "Other" = "darkgrey")
 ggplot(df, aes(x = Sample, y = Abundance, fill = GenusLabel)) +
   geom_bar(stat = "identity", position = "stack") +
+  scale_fill_manual(values = genus_cols, name = "Genus") + 
   ggnewscale::new_scale_fill() +
   geom_rect(
     aes(xmin = as.numeric(Sample) - 0.5, xmax = as.numeric(Sample) + 0.5,

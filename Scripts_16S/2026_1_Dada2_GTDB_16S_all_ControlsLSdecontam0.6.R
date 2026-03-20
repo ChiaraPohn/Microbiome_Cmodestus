@@ -150,6 +150,8 @@ colnames(taxid)
 filename <- paste0(Project, Database, "OutputDada2.RData")
 save.image(file = filename)
 
+load("16S_allGTDBOutputDada2.RData")
+
 ##### Build the Phyloseq file
 
 ps <- phyloseq(
@@ -181,6 +183,9 @@ names(dna) <- taxa_names(ps)
 ps <- merge_phyloseq(ps, dna)
 taxa_names(ps) <- paste0("ASV", seq(ntaxa(ps)))
 ps
+
+ps_predecontam <- ps
+
 
 sample_data(ps) <- sd
 sample_data(ps)$is.neg <- sample_data(ps)$Controls_LS == "yes"
@@ -214,7 +219,7 @@ table(contamdf.prev0.6$contaminant)
 
 
 #choose best option
-contamdf.prev <- contamdf.prev0.6
+contamdf.prev <- contamdf.prev0.5
 
 # Visualize prevalence of contaminants in samples and negative controls
 ps.pa <- transform_sample_counts(ps, function(abund) 1*(abund>0))
@@ -238,13 +243,16 @@ ps <- ps.noncontam
 ps
 
 
+#only bacteria:
+ps <- subset_taxa(ps, Domain == "Bacteria")
+print(ps)
 
 
 
 
 ###### Summarize ps
 
-microbiome::summarize_phyloseq(ps.noncontam)
+microbiome::summarize_phyloseq(ps)
 
 phyloseq::tax_table(ps)[1:20, 1:6]
 
@@ -265,10 +273,6 @@ sum(sum.check)
 median(sample_sums(ps))
 
 
-#only bacteria:
-ps <- subset_taxa(ps, Domain == "Bacteria")
-print(ps)
-
 #ps_LS <- subset_samples(ps, Experiment == "LS")
 #ps_antib <- subset_samples(ps, Experiment == "Antibiotics")
 #ps_bact <- subset_samples(ps, Experiment == "Bacteriome")
@@ -279,10 +283,59 @@ sum.check <- taxa_sums(ps_LS)
 sum(sum.check)
 
 #save workspace
-filename <- paste0(Project, "_50", Database, "onlyLS_0.6decontam.RData")
+filename <- paste0(Project, "_50", Database, "onlyLS_0.5decontam.RData")
 save.image(file = filename)
 
-#some quick plots to see what's going on: 
+
+### investigate contaminations before and after decontam
+
+library(tidyverse)
+
+#loop through the different options
+ps_list <- list(onlyLS_decontam0.5 = ps,nodecontam = ps_predecontam)
+
+for (tryout in names(ps_list)) {
+  
+  current_ps <- ps_list[[tryout]]
+  
+  #get ASVs
+  ASV <- as(otu_table(current_ps), "matrix")
+  
+  #save taxonomy into a table
+  taxonomy <- as.data.frame( tax_table(ps))
+  write.csv(taxonomy, file = paste0("Plots_16S/", tryout, "_taxonomy_table.csv"), row.names = TRUE)
+  
+  #transform ASV matrix
+  for_heatmap <- as_tibble(ASV, rownames = "ASV") %>%
+    #mutate(ASV = rownames(ASV)) %>%
+    pivot_longer(-ASV, names_to = "Sample", values_to = "reads") %>%
+    
+    group_by(Sample) %>%
+    mutate(relabund = reads / sum(reads)) %>%
+    ungroup() %>%
+    
+    group_by(ASV) %>%
+    mutate(prevalence = sum(reads>0) / n()) %>%
+    ungroup() %>%
+    
+    filter(prevalence > 0.1) %>%
+    
+    mutate(logread = log(reads)) 
+  
+  p <- ggplot(for_heatmap, aes(x = Sample, y = ASV, fill = reads)) +
+    geom_tile() +
+    theme(
+      axis.text.x = element_text(size = 6, angle = 45, hjust = 1)
+    )
+  p
+  
+  ggsave(paste0("Plots_16S/", "Heatmap2_", tryout, "_prev0.1.png"), plot = p, dpi = 300, width = 300, height = 250, units = "mm")
+  
+}
+
+
+
+#####some quick plots to see what's going on: 
 
 #alpha diversity: 
 plot_richness(ps, x="Generation", measures=c("Shannon", "Simpson"), color="Generation")
@@ -304,8 +357,5 @@ plot_bar(ps_top_families, x = "Generation", fill = "Family") +
   #ggtitle("Top 10 families") +
   theme_bw() +
   theme(panel.grid = element_blank())
-  
 
-ASV <- as(otu_table(ps), "matrix")
 tax_ASV <- tax_table(ps)
-

@@ -1,11 +1,21 @@
-tryout <- "onlyLS_decontam0.6"
+library(tidyverse)
 
-ASV <- as(otu_table(ps), "matrix")
+#loop through different options
+ps_list <- list(onlyLS_decontam0.5 = ps,nodecontam = ps_predecontam)
 
-taxonomy <- as.data.frame( tax_table(ps))
-write.csv(taxonomy, file = paste0("Plots_16S/", tryout, "_taxonomy_table.csv"), row.names = TRUE)
-
-for_heatmap <- as_tibble(ASV, rownames = "ASV") %>%
+for (tryout in names(ps_list)) {
+  
+  current_ps <- ps_list[[tryout]]
+  
+  #get ASVs
+  ASV <- as(otu_table(current_ps), "matrix")
+  
+  #save taxonomy into a table
+  taxonomy <- as.data.frame( tax_table(ps))
+  write.csv(taxonomy, file = paste0("Plots_16S/", tryout, "_taxonomy_table.csv"), row.names = TRUE)
+  
+  #transform ASV matrix
+  for_heatmap <- as_tibble(ASV, rownames = "ASV") %>%
   #mutate(ASV = rownames(ASV)) %>%
   pivot_longer(-ASV, names_to = "Sample", values_to = "reads") %>%
   
@@ -28,4 +38,6 @@ p <- ggplot(for_heatmap, aes(x = Sample, y = ASV, fill = reads)) +
   )
 p
 
-ggsave(paste0("Plots_16S/", "Heatmap_", tryout, "_prev0.1.png"), plot = p, dpi = 300, width = 300, height = 250, units = "mm")
+ggsave(paste0("Plots_16S/", "Heatmap2_", tryout, "_prev0.1.png"), plot = p, dpi = 300, width = 300, height = 250, units = "mm")
+
+}

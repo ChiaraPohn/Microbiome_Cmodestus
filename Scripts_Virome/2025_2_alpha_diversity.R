@@ -15,7 +15,7 @@ loaded_data <- "Scripts_Virome/2025_1_load_data.R"
 phyloseq <- ps.V2
 #phyloseq <- ps_rdrdp
 #phyloseq <- ps
-Factors <- c("Generation", "Generation_combinedF0")
+Factors <- c("Generation", "Generation_combinedF0") #possible to look at all other things too
 Project <- "LS_virome_XY_adj"
 Project <- "LS_virome_rdrp"
 #Project <- "LS_Cmodestus2025_16S_bac"

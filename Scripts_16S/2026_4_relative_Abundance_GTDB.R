@@ -211,9 +211,7 @@ rel_ab_plot <- addSmallLegend(p, spaceLegend = .5) +
 
 rel_ab_plot
 
-#ggsave("Plots_16S/relative_abundance_noWB_decontam0.2.png", dpi = 300, width = 170, height = 120, units = "mm")
-
-ggsave("Plots_16S/relative_abundance_noWB_decontam0.6.png", dpi = 300, width = 170, height = 120, units = "mm")
+ggsave("Plots_16S/relative_abundance_noWB_decontam0.5.png", dpi = 300, width = 170, height = 120, units = "mm")
 
 
 # Create Pseudomonadota plot
@@ -288,9 +286,7 @@ rel_ab_proteo_plot <- addSmallLegend(p2, spaceLegend = .5, pointSize = .5, textS
   )
 p2
 
-#ggsave("Plots_16S/relative_abundance_pseudomonadota_noWB_decontam0.2.png", dpi = 300, width = 170, height = 120, units = "mm")
-
-ggsave("Plots_16S/relative_abundance_pseudomonadota_noWB_decontam0.6.png", dpi = 300, width = 170, height = 120, units = "mm")
+ggsave("Plots_16S/relative_abundance_pseudomonadota_noWB_decontam0.5.png", dpi = 300, width = 170, height = 120, units = "mm")
 
 
 

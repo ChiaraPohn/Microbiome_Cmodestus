@@ -113,7 +113,6 @@ write.table(track, file = "trackingReads.tsv", sep = "\t", row.names = TRUE)
 
 library(DECIPHER)
 packageVersion("DECIPHER")
-library(phyloseq); packageVersion("phyloseq")
 library(Biostrings); packageVersion("Biostrings")
 library(ggplot2); packageVersion("ggplot2")
 library(microbiome)
@@ -153,6 +152,8 @@ save.image(file = filename)
 load("16S_allGTDBOutputDada2.RData")
 
 ##### Build the Phyloseq file
+library(phyloseq); packageVersion("phyloseq")
+
 
 ps <- phyloseq(
   otu_table(t(seqtab.nochim), taxa_are_rows = T),

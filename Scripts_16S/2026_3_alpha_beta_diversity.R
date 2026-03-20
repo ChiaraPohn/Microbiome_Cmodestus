@@ -5,7 +5,7 @@ library(ggpubr)
 library(ggplot2)
 library(dplyr)
 
-Project <- "LS_16S_decontam0.2"
+Project <- "onlyLS_16S_decontam0.5"
 Factor <- "Generation"
 Heading <- "Bacteriome"
 
@@ -95,13 +95,10 @@ v.ord <- ape::pcoa(vegan_avgdist)
 
 #for generations:
 pcoa <- plot_ordination(ps, v.ord, type="samples", color="Generation", axes = c(1, 2))+
-  stat_ellipse(type = "norm", linetype = 2, aes_string(group="Generation"), size=0.7, show.legend = F)+
   geom_point(size=2) +
-theme_bw()# +
-#scale_color_viridis_d(begin=0, end =.9, name="")
+theme_bw()
 
 pcoa
-
 
 #centroids:
 
@@ -124,7 +121,7 @@ pcoa2
 ggsave(paste0("Plots_16S/", Project, "_", Database,"_BetaDiversity_", Factor, ".png"), dpi = 300, width = 200, height = 120, units = "mm")
 
 
-#is the difference significant?
+#is there a significant difference?
 
 meta_matrix <- as.matrix(sample_data(ps))
 meta_df <- as.data.frame(meta_matrix)
@@ -136,12 +133,4 @@ adonis_result <- adonis2(vegan_avgdist ~ Generation, data = meta_df, permutation
 
 print(adonis_result)
 
-#can i find out which generations are driving this?
 
-pairwise_results <- pairwise.adonis(vegan_avgdist, meta_df[[Factor]], p.adjust.m = "BH")
-
-significant_results <- pairwise_results[pairwise_results$p.adj < 0.05, ]
-# Print only significant results
-print(significant_results)
-
-results <- as.data.frame(pairwise_results)

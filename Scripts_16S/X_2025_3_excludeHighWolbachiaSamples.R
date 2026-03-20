@@ -1,6 +1,6 @@
 #load("16S_all_50GTDB.RData")
 
-source("Scripts_16S/2025_2_Wolbachia_contamination.R")
+#source("Scripts_16S/2025_2_Wolbachia_contamination.R")
 ps <- subset_samples(ps, Experiment == "LS")
 
 ps_rel <- transform_sample_counts(ps, function(x) x / sum(x) * 100)

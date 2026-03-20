@@ -1,25 +1,31 @@
 
-#load("16S_all_50GTDB.RData")
-#load("16S_data_all/16S_all_50GTDB.RData")
-load("16S_all_50GTDBsensitivedecontam.RData")
-
+#if starting separately:
+#load("16S_all_50GTDBonlyLS_0.5decontam.RData")
 
 library(phyloseq)
 library(ggplot2)
 
-#plot Wolbachia across all samples sequenced together
-ps_genus <- tax_glom(ps, taxrank = "Genus")
+#loop through the different options
+ps_list <- list(nodecontam = ps_predecontam, onlyLS_decontam0.5 = ps)
 
-ps_wolbachia <- subset_taxa(ps, Genus == "Wolbachia")
+for (tryout in names(ps_list)) {
+  
+  current_ps <- ps_list[[tryout]]
+
+#plot Wolbachia across all samples sequenced together
+ps_genus <- tax_glom(current_ps, taxrank = "Genus")
+
+ps_wolbachia <- subset_taxa(current_ps, Genus == "Wolbachia")
 
 df <- psmelt(ps_wolbachia)  # Melts into long format
 
-ggplot(df, aes(x = Sample, y = Abundance, fill = Experiment)) +
+p <- ggplot(df, aes(x = Sample, y = Abundance, fill = Experiment)) +
   geom_bar(stat = "identity") +
   labs(title = "Wolbachia Reads per Sample", y = "Read Count", x = "Sample") +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1))
-ggsave(paste0("Plots_16S/Wolbachiareadcounts_allProjects.png"), dpi = 300, width = 200, height = 120, units = "mm")
+p
+ggsave(paste0("Plots_16S/", "Wolbachiareadcounts_", tryout, ".png"), plot = p, dpi = 300, width = 200, height = 120, units = "mm")
 
 
 sum_reads <- as.data.frame(sample_sums(ps_wolbachia))
@@ -53,7 +59,7 @@ ggplot(df, aes(x = Sample, y = Abundance, fill = GenusLabel)) +
 library(ggnewscale)
 
 genus_cols <- c("Wolbachia" = "darkblue", "Other" = "darkgrey")
-ggplot(df, aes(x = Sample, y = Abundance, fill = GenusLabel)) +
+p <- ggplot(df, aes(x = Sample, y = Abundance, fill = GenusLabel)) +
   geom_bar(stat = "identity", position = "stack") +
   scale_fill_manual(values = genus_cols, name = "Genus") + 
   ggnewscale::new_scale_fill() +
@@ -70,28 +76,15 @@ ggplot(df, aes(x = Sample, y = Abundance, fill = GenusLabel)) +
   ) +
   scale_y_continuous(expand = expansion(mult = c(0.12, 0.05))) +
   coord_cartesian(clip = "off")
+p
 
-ggsave("Plots_16S/WolbachiaReads_allExperiments.png", dpi = 300, width = 200, height = 100, units = "mm")
+ggsave(paste0("Plots_16S/", "Wolbachiareadcounts_vsOthers_", tryout, ".png"), plot = p, dpi = 300, width = 200, height = 100, units = "mm")
 
-
-#relative abundance: 
-
-# Transform to relative abundance
-ps_relative <- transform_sample_counts(ps_genus, function(x) x / sum(x))
-
-# Melt
-df_rel <- psmelt(ps_relative)
-
-# Plot
-ggplot(df_rel, aes(x = Sample, y = Abundance, fill = GenusLabel)) +
-  geom_bar(stat = "identity", position = "stack") +
-  labs(title = "Relative Abundance: Wolbachia vs Other",
-       y = "Proportion", x = "Sample", fill = "Genus") +
-  theme_minimal() +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
+}
 
 
-## align my wolbachia reads with each other
+##### check my wolbachia reads #####
+#align my wolbachia reads with each other
 # Extract the OTU/ASV table from your phyloseq object
 otu_mat <- as(otu_table(ps), "matrix")
 
@@ -115,5 +108,10 @@ wolbachia_seqs_filtered <- all_seqs[wolbachia_asvs_filtered]
 
 library(DECIPHER)
 alignment <- AlignSeqs(wolbachia_seqs_filtered, anchor=NA)
-BrowseSeqs(alignment)
 
+# to look at it:
+#BrowseSeqs(alignment)
+
+
+#remove remaining Wolbachia reads
+ps <- subset_taxa(ps, Genus != "Wolbachia" | is.na(Genus))

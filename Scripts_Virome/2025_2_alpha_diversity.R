@@ -10,16 +10,16 @@ library(ggpubr)
 here::i_am("Scripts_Virome/2025_2_alpha_diversity.R")
 
 #change depending on which dataset, factor etc. I am looking at:
-loaded_data <- "Scripts_Virome/2025_1_load_data.R" 
+#loaded_data <- "Scripts_Virome/2025_1_load_data.R" 
 #loaded_data <- "Project, "_", Database, ".RData"
 phyloseq <- ps.V2
-#phyloseq <- ps_rdrdp
+phyloseq <- ps_rdrdp
 #phyloseq <- ps
 Factors <- c("Generation", "Generation_combinedF0") #possible to look at all other things too
-Project <- "LS_virome_XY_adj"
-Project <- "LS_virome_rdrp"
+#Project <- "LS_virome_XY_adj"
+Project <- "LS_virome_rdrp2026"
 #Project <- "LS_Cmodestus2025_16S_bac"
-Heading <- "Virome Palmprint" # "Bacteriome"
+Heading <- "Virome Palmprint2026" # "Bacteriome"
 
 source(loaded_data)
 meta <- data.frame(sample_data(phyloseq))

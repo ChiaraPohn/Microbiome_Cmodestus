@@ -49,8 +49,23 @@ for (virus in names(virus_files)) {
     file = paste0("Tables_Virome_2026/PercentID_", virus, ".csv"),
     row.names = FALSE)
   
-  # Create the plot
+  # Create a file with the right direction of start/end
+  plot_data_2 <- plot_data %>%
+    mutate(
+      is_reverse = sstart > send,
+      filter_coord = ifelse(is_reverse, send, sstart)
+    ) #%>%
+    #filter(
+     # filter_coord < 2900
+  #  )
+  
+  write.csv(plot_data_2,
+            file = paste0("Tables_Virome_2026/PercentID_corrected_", virus, ".csv"),
+            row.names = FALSE)
+  
+  #create the plot
   p <- ggplot(plot_data, aes(x = sstart, xend = send, y = qseqid, yend = qseqid, fill = pident)) +
+ # p <- ggplot(plot_data_2, aes(x = sstart, xend = send, y = qseqid, yend = qseqid, fill = pident)) +
     geom_segment(aes(color = pident), linewidth = 2) +
     labs(
       title = paste0(toupper(substr(virus, 1, 1)), substr(virus, 2, nchar(virus)), " virus genome"),
@@ -72,3 +87,14 @@ for (virus in names(virus_files)) {
     dpi = 300, width = 250, height = 250, units = "mm"
   )
 }
+
+#now get my contig names 
+toti <- read.table("Tables_Virome_2026/PercentID_correctedtotilike.csv", header=TRUE, sep=",", dec=".")
+totilike_contigs_before_2900 <- toti$qseqid[toti$filter_coord < 2900]
+writeLines(totilike_contigs_before_2900, "Tables_Virome_2026/Totilike_contigs_foralignment.txt")
+
+picorna <- read.table("Tables_Virome_2026/PercentID_correctedpicornalike.csv", header=TRUE, sep=",", dec=".")
+picornalike_contigs_before_4500 <- picorna$qseqid[picorna$filter_coord < 4500]
+picornalike_contigs_after_4500 <- picorna$qseqid[picorna$filter_coord > 4500]
+writeLines(picornalike_contigs_before_4500, "Tables_Virome_2026/Picornalike_contigs_foralignment1.txt")
+writeLines(picornalike_contigs_after_4500, "Tables_Virome_2026/Picornalike_contigs_foralignment2.txt")

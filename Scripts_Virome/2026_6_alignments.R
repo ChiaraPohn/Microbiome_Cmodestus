@@ -95,6 +95,7 @@ for (virus in names(virus_files)) {
 toti <- read.table("Tables_Virome_2026/PercentID_correctedtotilike.csv", header=TRUE, sep=",", dec=".")
 totilike_contigs_before_2900 <- toti$qseqid[toti$filter_coord < 2900]
 writeLines(totilike_contigs_before_2900[totilike_contigs_before_2900 != "Hit"], "Tables_Virome_2026/Totilike_contigs_foralignment.txt")
+#add NODE_A2_length_7099_cov_245.671176_W34
 
 picorna <- read.table("Tables_Virome_2026/PercentID_correctedpicornalike.csv", header=TRUE, sep=",", dec=".")
 picornalike_contigs_before_4500 <- picorna$qseqid[picorna$filter_coord < 4500]
@@ -115,3 +116,67 @@ all_picorna <- c(
 all_picorna <- unique(all_picorna)  # optional: remove duplicates
 
 writeLines( all_picorna[all_picorna != "Hit"],  "Tables_Virome_2026/Picornalike_all_contigs_foralignment1.txt")
+
+#rename my contigs in my fasta file
+### as a loop ####
+
+library(Biostrings)
+
+# Create sample -> generation lookup
+gen_map <- setNames(meta$Generation, meta$sample)
+
+# FASTA files to process
+fasta_files <- c(
+  "picorna_all_foralignment1.fasta",
+  "toti_all_foralignment.fasta"
+)
+
+for (f in fasta_files) {
+  
+  in_file <- file.path(
+    "Tables_Virome_2026/Blastn_output",
+    f
+  )
+  
+  out_file <- file.path(
+    "Tables_Virome_2026/Blastn_output",
+    paste0("renamed_", f)
+  )
+  
+  fa <- readDNAStringSet(in_file)
+  hdr <- names(fa)
+  
+  # Split header into components
+  parts <- strsplit(hdr, "_")
+  
+  # Extract desired fields
+  node <- sapply(parts, function(x) paste(x[1], x[2], sep = "_"))
+  len <- sapply(parts, function(x) x[which(x == "length") + 1])
+  sample <- sapply(parts, tail, 1)
+  
+  # Look up generation
+  generation <- gen_map[sample]
+  generation <- gsub("\\s+", "_", generation)
+  
+  # Construct new header:
+  # NODE_A470_1165_LS43_Generation
+  new_hdr <- paste(node, len, sample, generation, sep = "_")
+  
+  # Optional sanity check
+  cat("\nExample renaming for", f, ":\n")
+  print(head(data.frame(old = hdr, new = new_hdr), 3))
+  
+  # Warn if any samples were not found in metadata
+  if (any(is.na(generation))) {
+    warning(
+      "Samples not found in metadata: ",
+      paste(unique(sample[is.na(generation)]), collapse = ", ")
+    )
+  }
+  
+  names(fa) <- new_hdr
+  
+  writeXStringSet(fa, out_file)
+  
+  cat("Finished:", f, "\n")
+}

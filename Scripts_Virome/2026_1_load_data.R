@@ -84,11 +84,21 @@ summary_checkv_50 <- summary_checkv %>%
 
 #make sure that the contig name is its own row
 summary_checkv_50$Contig <- rownames(summary_checkv_50)
+summary_checkv$Contig <- rownames(summary_checkv)
 
 #merge tax and checkv, so as to only keep complete ones
 tax_merged <- merge(summary_checkv_50, tax, by = "Contig")
 rownames(tax_merged) <- tax_merged$Contig
 
+tax_merged2 <- merge(summary_checkv, tax, by = "Contig")
+rownames(tax_merged2) <- tax_merged2$Contig
+
+tax_merged2 %>%
+  filter(
+    completeness < 50,
+    Kingdom == "Viruses"
+    ) %>%
+  count(Species)
 
 #### Make a phyloseq object ###
 

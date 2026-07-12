@@ -18,9 +18,11 @@ library(readr)
 
 # Named vector for virus names and file paths
 virus_files <- c(
-  picornalike = "Tables_Virome_2026/Blastn_output/NODE_A1_length_9715_cov_66.678149_LS33.blastn_header.tsv", 
+  picorna_like = "Tables_Virome_2026/Blastn_output/picorna-like.blastn_header.tsv",
+  picornalike_LS33 = "Tables_Virome_2026/Blastn_output/NODE_A1_length_9715_cov_66.678149_LS33.blastn_header.tsv", 
   picornalike_LS40 = "Tables_Virome_2026/Blastn_output/NODE_A3_length_5049_cov_26.666935_LS40.blastn_header.tsv", 
   picornalike_W50 = "Tables_Virome_2026/Blastn_output/NODE_A1_length_9685_cov_312.741153_W50.blastn_header.tsv", 
+  toti_like = "Tables_Virome_2026/Blastn_output/toti-like.blastn_header.tsv",
   totilike_LS63    = "Tables_Virome_2026/Blastn_output/NODE_A1_length_7154_cov_76.883284_LS63.blastn_header.tsv",
   totilike_W34 = "Tables_Virome_2026/Blastn_output/NODE_A2_length_7099_cov_245.671176_W34.blastn_header.tsv")
 
@@ -92,30 +94,17 @@ for (virus in names(virus_files)) {
 }
 
 #now get my contig names 
-toti <- read.table("Tables_Virome_2026/PercentID_correctedtotilike.csv", header=TRUE, sep=",", dec=".")
+toti <- read.table("Tables_Virome_2026/PercentID_corrected_toti_like.csv", header=TRUE, sep=",", dec=".")
 totilike_contigs_before_2900 <- toti$qseqid[toti$filter_coord < 2900]
-writeLines(totilike_contigs_before_2900[totilike_contigs_before_2900 != "Hit"], "Tables_Virome_2026/Totilike_contigs_foralignment.txt")
-#add NODE_A2_length_7099_cov_245.671176_W34
+totilike_contigs_before_2900 <- unique(totilike_contigs_before_2900)  # optional: remove duplicates
 
-picorna <- read.table("Tables_Virome_2026/PercentID_correctedpicornalike.csv", header=TRUE, sep=",", dec=".")
+writeLines(totilike_contigs_before_2900[totilike_contigs_before_2900 != "Hit"], "Tables_Virome_2026/Totilike_contigs_foralignment.txt")
+
+picorna <- read.table("Tables_Virome_2026/PercentID_corrected_picorna_like.csv", header=TRUE, sep=",", dec=".")
 picornalike_contigs_before_4500 <- picorna$qseqid[picorna$filter_coord < 4500]
 picornalike_contigs_after_4500 <- picorna$qseqid[picorna$filter_coord > 4500]
-writeLines(picornalike_contigs_before_4500[picornalike_contigs_before_4500 != "Hit"], "Tables_Virome_2026/PicornalikeLS33_contigs_foralignment1.txt")
-writeLines(picornalike_contigs_after_4500[picornalike_contigs_after_4500 != "Hit"], "Tables_Virome_2026/PicornalikeLS33_contigs_foralignment2.txt")
-
-#for picornalike: add LS40 and W50 contigs 
-
-picorna_W50 <- read.table("Tables_Virome_2026/PercentID_corrected_picornalike_W50.csv", header=TRUE, sep=",", dec=".")
-picorna_LS40 <- read.table("Tables_Virome_2026/PercentID_corrected_picornalike_LS40.csv", header=TRUE, sep=",", dec=".")
-
-
-all_picorna <- c(
-  picornalike_contigs_before_4500, picorna_W50$qseqid, picorna_LS40$qseqid
-)
-
-all_picorna <- unique(all_picorna)  # optional: remove duplicates
-
-writeLines( all_picorna[all_picorna != "Hit"],  "Tables_Virome_2026/Picornalike_all_contigs_foralignment1.txt")
+writeLines(picornalike_contigs_before_4500[picornalike_contigs_before_4500 != "Hit"], "Tables_Virome_2026/Picornalike_contigs_foralignment1.txt")
+writeLines(picornalike_contigs_after_4500[picornalike_contigs_after_4500 != "Hit"], "Tables_Virome_2026/Picornalike_contigs_foralignment2.txt")
 
 #rename my contigs in my fasta file
 ### as a loop ####
@@ -127,8 +116,10 @@ gen_map <- setNames(meta$Generation, meta$sample)
 
 # FASTA files to process
 fasta_files <- c(
-  "picorna_all_foralignment1.fasta",
-  "toti_all_foralignment.fasta"
+  "Picornalike_contigs_foralignment1.fasta",
+  "Picornalike_contigs_foralignment2.fasta",
+  
+  "Totilike_contigs_foralignment.fasta"
 )
 
 for (f in fasta_files) {

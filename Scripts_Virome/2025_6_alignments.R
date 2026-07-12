@@ -18,8 +18,10 @@ library(readr)
 
 # Named vector for virus names and file paths
 virus_files <- c(
-  picornalike = "Tables_Virome/picorna_like_blastn_header.tsv", 
-  totilike    = "Tables_Virome/toti_like_blastn_header.tsv")
+  #picornalike = "Tables_Virome/picorna_like_blastn_header.tsv", 
+  picorna_like = "Tables_Virome_2026/Blastn_output/picorna-like.blastn_header.tsv", 
+  #totilike    = "Tables_Virome/toti_like_blastn_header.tsv")
+  toti_like    = "Tables_Virome_2026/Blastn_output/toti-like.blastn_header.tsv")
 
 # Loop over the named vector
 for (virus in names(virus_files)) {
@@ -67,7 +69,7 @@ for (virus in names(virus_files)) {
   p
   # Save plot
   ggsave(
-    filename = paste0("Plots_Virome/2025_Alignment_", virus, "_contigs.png"),
+    filename = paste0("Plots_Virome/2026_Alignment_", virus, "_contigs.png"),
     plot = p,
     dpi = 300, width = 250, height = 250, units = "mm"
   )

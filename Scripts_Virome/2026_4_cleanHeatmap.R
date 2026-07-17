@@ -112,18 +112,12 @@ ggplot(OTU_tidy, aes(x = Sample, y = OTU, fill = Abundance)) +
     axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 6, color = "black")
   )
 
-ggsave("Plots_Virome/Heatmap_all_2026.png", dpi = 300, width = 280, height = 130, units = "mm")
+ggsave("Plots_Virome/Heatmap_wContaminants_2026.png", dpi = 300, width = 280, height = 130, units = "mm")
 
 
-#excluding the contaminants: 
+#only relevant (cofirmed) OTUs:
 
-otus_to_exclude <- c("NODE_A45_length_2262_cov_3.486957_LS18", "NODE_A26_length_2598_cov_59.167394_LS_NIC2",   
-                     "NODE_A25_length_3182_cov_46.514654_LS_NIC5", "NODE_A3_length_4982_cov_166.105810_LS_NIC2",
-                     "NODE_A1_length_9017_cov_64.388702_LS_NIC6","NODE_A28_length_2975_cov_68.363699_LS_NIC5", 
-                   "NODE_A33_length_1783_cov_70.613716_W50", "NODE_A1_length_5920_cov_121.301557_LS_NIC4")
-
-otu_filtered <- OTU_X[!(rownames(OTU_X) %in% otus_to_exclude), ]
-
+otu_filtered <- OTU_X[rownames(OTU_X) %in% selected_otus, ]
 
 OTU_tidy <- 
   otu_filtered |> 
@@ -144,6 +138,7 @@ new_otu_names <- c("NODE_A13_length_3436_cov_154.678773_W39" = "Broome luteo-lik
                    "NODE_A1_length_7154_cov_76.883284_LS63" = "CmLeuv toti-like virus LS63", 
                    "NODE_A1_length_9685_cov_312.741153_W50" ="XiangYun picorna-like virus 2 W50", 
                    "NODE_A1_length_9715_cov_66.678149_LS33" ="XiangYun picorna-like virus 2 LS33", 
+                   "NODE_A3_length_5049_cov_26.666935_LS40" = "XiangYun picorna-like virus 2 LS40",
                    "NODE_A2_length_6321_cov_434.172165_LS72" = "Culex inatomii totivirus",
                    "NODE_A2_length_7099_cov_245.671176_W34" = "CmLeuv toti-like virus W34", 
                     "NODE_A34_length_1757_cov_2823.761905_G28" = "Sonnbo virus", 
@@ -187,7 +182,7 @@ main_heatmap <- ggplot(OTU_tidy, aes(x = Sample, y = OTU, fill = Abundance)) +
 
 main_heatmap 
 
-ggsave("Plots_Virome/Heatmap_palmprint_2026.png", dpi = 300, width = 280, height = 130, units = "mm")
+ggsave("Plots_Virome/Heatmap_palmprint_2026_withLS40.png", dpi = 300, width = 280, height = 130, units = "mm")
 
 generation_palette <- c(
   "F0 2020" = "tomato",     
@@ -217,7 +212,7 @@ combined_plot <- (main_heatmap / generation_bar) +
   theme(legend.position = "right")
 combined_plot
 
-ggsave("Plots_Virome/Heatmap_palmprint_generation_2026.png", dpi = 300, width = 280, height = 150, units = "mm")
+ggsave("Plots_Virome/Heatmap_palmprint_generation_2026_wLS40.png", dpi = 300, width = 280, height = 150, units = "mm")
 
 
 

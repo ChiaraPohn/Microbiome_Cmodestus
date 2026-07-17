@@ -79,15 +79,15 @@ tax$Contig <- rownames(tax)
 
 #filter for completeness
 summary_checkv <- read.table(completeness_table, header=TRUE, row.names=1, sep="\t", dec=".")
-summary_checkv_50 <- summary_checkv %>%
-  filter(completeness >= 50)
+summary_checkv_45 <- summary_checkv %>%
+  filter(completeness >= 45)
 
 #make sure that the contig name is its own row
-summary_checkv_50$Contig <- rownames(summary_checkv_50)
+summary_checkv_45$Contig <- rownames(summary_checkv_45)
 summary_checkv$Contig <- rownames(summary_checkv)
 
 #merge tax and checkv, so as to only keep complete ones
-tax_merged <- merge(summary_checkv_50, tax, by = "Contig")
+tax_merged <- merge(summary_checkv_45, tax, by = "Contig")
 rownames(tax_merged) <- tax_merged$Contig
 
 tax_merged2 <- merge(summary_checkv, tax, by = "Contig")
@@ -147,7 +147,7 @@ df.pa %>%
   filter(pa.pos == 0 & pa.neg == 1)
 
 # Remove negative controls and contaminants from phyloseq object
-ps.noncontam <- prune_taxa(!contamdf.prev$contaminant, ps)
+ps.noncontam <- prune_taxa(!contamdf.prev0.5$contaminant, ps)
 ps.noncontam
 ps.noncontam <- prune_samples(sample_data(ps)$Control!='yes', ps.noncontam)
 ps <- ps.noncontam

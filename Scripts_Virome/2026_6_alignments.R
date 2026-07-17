@@ -101,8 +101,8 @@ totilike_contigs_before_2900 <- unique(totilike_contigs_before_2900)  # optional
 writeLines(totilike_contigs_before_2900[totilike_contigs_before_2900 != "Hit"], "Tables_Virome_2026/Totilike_contigs_foralignment.txt")
 
 picorna <- read.table("Tables_Virome_2026/PercentID_corrected_picorna_like.csv", header=TRUE, sep=",", dec=".")
-picornalike_contigs_before_4500 <- picorna$qseqid[picorna$filter_coord < 4500]
-picornalike_contigs_after_4500 <- picorna$qseqid[picorna$filter_coord > 4500]
+picornalike_contigs_before_4500 <- unique(picorna$qseqid[picorna$filter_coord < 4500])
+picornalike_contigs_after_4500 <- unique(picorna$qseqid[picorna$filter_coord > 4500])
 writeLines(picornalike_contigs_before_4500[picornalike_contigs_before_4500 != "Hit"], "Tables_Virome_2026/Picornalike_contigs_foralignment1.txt")
 writeLines(picornalike_contigs_after_4500[picornalike_contigs_after_4500 != "Hit"], "Tables_Virome_2026/Picornalike_contigs_foralignment2.txt")
 
@@ -118,7 +118,6 @@ gen_map <- setNames(meta$Generation, meta$sample)
 fasta_files <- c(
   "Picornalike_contigs_foralignment1.fasta",
   "Picornalike_contigs_foralignment2.fasta",
-  
   "Totilike_contigs_foralignment.fasta"
 )
 

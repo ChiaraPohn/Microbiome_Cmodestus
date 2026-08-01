@@ -48,3 +48,5 @@ Raw reads are processed and analyzed in R (folder: Scripts_16S)
 3: assess alpha and beta diversity
 
 4: investigating relative abundance distributions of phyla and families
+
+5: visualise qPCR copy numbers within generations

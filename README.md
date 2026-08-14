@@ -9,7 +9,8 @@ This is a workflow including HPC analyses of Illumina sequencing reads for viral
 
 The HPC scripts folder holds all scripts for analyses performed on a cluster, running the ViPER Pipeline (https://github.com/Matthijnssenslab/ViPER) for processing paired-end Illumina reads - this includes deduplexing, trimming (Trimmomatic), assembly (metaSPAdes), as well as mapping reads to contigs (bwa-mem2) and classification (DIAMOND, KronaTools). Viruses are checked for completeness via checkV. 
 In detail: 
-Before starting, make sure all .sh scripts are usable by performing chmod +x on all, work from the scripts folder. Install the viper pipeline according to the instructions. 
+Have a permanent and working space organized the same with the project name and subfolders for data as well as scripts on the permanent storage. Copy the raw data to a the working folder set up as LS_Cmodestus2026/data/viper/. Work from the scripts folder. Before starting, make sure all .sh scripts are usable by performing chmod +x. Install the viper pipeline according to the instructions. 
+
 1.	Start viper pipeline by submitting the viper_dedup.slurm script via submitviper.sh, which needs the names of all samples (LS_names.txt) as input
 2.	Make one combined contig file for the project by executing the copy_contigs.sh script
 3.	Cluster the contigs by running Clustering.slurm (input: LS_all_1000.fasta)

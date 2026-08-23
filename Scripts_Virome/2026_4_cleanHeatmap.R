@@ -20,6 +20,7 @@ selected_otus <- c("NODE_A1_length_10358_cov_1043.127711_W54",
                    "NODE_B2_length_5021_cov_122.489280_W34", 
                    "NODE_A1_length_11078_cov_302.965821_G30",
                    "NODE_A34_length_1757_cov_2823.761905_G28",
+                   "NODE_A35_length_1757_cov_2823.631548_G28",
                    "NODE_A3_length_5049_cov_26.666935_LS40", 
                    "NODE_A4_length_5001_cov_97.426483_W50")
 
@@ -74,6 +75,7 @@ new_otu_names <- c("NODE_A13_length_3436_cov_154.678773_W39" = "Broome luteo-lik
                    "NODE_A33_length_1783_cov_70.613716_W50" =  "Unclassified Circovirus", 
                    "NODE_A1_length_5920_cov_121.301557_LS_NIC4" = "Unclassified Microvirus",
                    "NODE_A34_length_1757_cov_2823.761905_G28" = "Sonnbo virus", 
+                   "NODE_A35_length_1757_cov_2823.631548_G28" = "Sonnbo virus",
                    "NODE_A4_length_5001_cov_97.426483_W50" = "Tombusviridae sp.")
 
 # Rename OTUs
@@ -142,6 +144,7 @@ new_otu_names <- c("NODE_A13_length_3436_cov_154.678773_W39" = "Broome luteo-lik
                    "NODE_A2_length_6321_cov_434.172165_LS72" = "Culex inatomii totivirus",
                    "NODE_A2_length_7099_cov_245.671176_W34" = "CmLeuv toti-like virus W34", 
                     "NODE_A34_length_1757_cov_2823.761905_G28" = "Sonnbo virus", 
+                   "NODE_A35_length_1757_cov_2823.631548_G28" = "Sonnbo virus",
                    "NODE_A4_length_5001_cov_97.426483_W50" = "Tombusviridae sp.")
 
 # Rename OTUs

@@ -51,7 +51,7 @@ for (virus in names(virus_files)) {
   
   #save file in case i want to check something
   write.csv(plot_data,
-    file = paste0("Tables_Virome_2026/PercentID_", virus, ".csv"),
+    file = paste0("Tables_Virome_2026/outputR/PercentID_", virus, ".csv"),
     row.names = FALSE)
   
   # Create a file with the right direction of start/end
@@ -65,7 +65,7 @@ for (virus in names(virus_files)) {
   #  )
   
   write.csv(plot_data_2,
-            file = paste0("Tables_Virome_2026/PercentID_corrected_", virus, ".csv"),
+            file = paste0("Tables_Virome_2026/outputR/PercentID_corrected_", virus, ".csv"),
             row.names = FALSE)
   
   #create the plot
@@ -94,19 +94,20 @@ for (virus in names(virus_files)) {
 }
 
 #now get my contig names 
-toti <- read.table("Tables_Virome_2026/PercentID_corrected_toti_like.csv", header=TRUE, sep=",", dec=".")
+toti <- read.table("Tables_Virome_2026/outputR/PercentID_corrected_toti_like.csv", header=TRUE, sep=",", dec=".")
 totilike_contigs_before_2900 <- toti$qseqid[toti$filter_coord < 2900]
 totilike_contigs_before_2900 <- unique(totilike_contigs_before_2900)  # optional: remove duplicates
 
-writeLines(totilike_contigs_before_2900[totilike_contigs_before_2900 != "Hit"], "Tables_Virome_2026/Totilike_contigs_foralignment.txt")
+writeLines(totilike_contigs_before_2900[totilike_contigs_before_2900 != "Hit"], "Tables_Virome_2026/outputR/Totilike_contigs_foralignment.txt")
 
-picorna <- read.table("Tables_Virome_2026/PercentID_corrected_picorna_like.csv", header=TRUE, sep=",", dec=".")
+picorna <- read.table("Tables_Virome_2026/outputR/PercentID_corrected_picorna_like.csv", header=TRUE, sep=",", dec=".")
 picornalike_contigs_before_4500 <- unique(picorna$qseqid[picorna$filter_coord < 4500])
 picornalike_contigs_after_4500 <- unique(picorna$qseqid[picorna$filter_coord > 4500])
-writeLines(picornalike_contigs_before_4500[picornalike_contigs_before_4500 != "Hit"], "Tables_Virome_2026/Picornalike_contigs_foralignment1.txt")
-writeLines(picornalike_contigs_after_4500[picornalike_contigs_after_4500 != "Hit"], "Tables_Virome_2026/Picornalike_contigs_foralignment2.txt")
+writeLines(picornalike_contigs_before_4500[picornalike_contigs_before_4500 != "Hit"], "Tables_Virome_2026/outputR/Picornalike_contigs_foralignment1.txt")
+writeLines(picornalike_contigs_after_4500[picornalike_contigs_after_4500 != "Hit"], "Tables_Virome_2026/outputR/Picornalike_contigs_foralignment2.txt")
 
-#rename my contigs in my fasta file
+
+#rename my contigs in my fasta file after getting it from the HPC
 ### as a loop ####
 
 library(Biostrings)

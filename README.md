@@ -8,8 +8,10 @@ This is a workflow including HPC analyses of Illumina sequencing reads for viral
 
 
 The HPC scripts folder holds all scripts for analyses performed on a cluster, running the ViPER Pipeline (https://github.com/Matthijnssenslab/ViPER) for processing paired-end Illumina reads - this includes deduplexing, trimming (Trimmomatic), assembly (metaSPAdes), as well as mapping reads to contigs (bwa-mem2) and classification (DIAMOND, KronaTools). Viruses are checked for completeness via checkV. 
+
 In detail: 
-Before starting, make sure all .sh scripts are usable by performing chmod +x on all, work from the scripts folder. Install the viper pipeline according to the instructions. 
+Have a permanent and working space both organized in the same way, with the project name and subfolders for data as well as scripts on the permanent storage. Copy the raw data to a the working folder set up as LS_Cmodestus2026/data/viper/. Work from the scripts folder. Before starting, make sure all .sh scripts are usable by performing chmod +x. Install the viper pipeline according to the instructions. 
+
 1.	Start viper pipeline by submitting the viper_dedup.slurm script via submitviper.sh, which needs the names of all samples (LS_names.txt) as input
 2.	Make one combined contig file for the project by executing the copy_contigs.sh script
 3.	Cluster the contigs by running Clustering.slurm (input: LS_all_1000.fasta)
@@ -19,7 +21,7 @@ Before starting, make sure all .sh scripts are usable by performing chmod +x on 
 7.	Run diamond on the combined data via taxonomy_chiara.slurm
 8.	Check contigs for Rdrp presence by running palm_annot.slurm
 9.	Run blastn_combined.sh to BLAST smaller contigs to the found Rdrp-containing cluster representatives, as well as all picorna-like and toti-like contigs to the largest genome found in our dataset
-10.	For trees: make an additional directory called trees in the permanent storage, use the get_contigs.sh script to produce fasta files for each tree using the text files produced in R
+(10.	For trees: make an additional directory called trees in the permanent storage, use the get_contigs.sh script to produce fasta files for each tree using the text files produced in R)
 11.	Run cleanup.sh to copy all important files to the permanent storage
 
 
@@ -48,3 +50,5 @@ Raw reads are processed and analyzed in R (folder: Scripts_16S)
 3: assess alpha and beta diversity
 
 4: investigating relative abundance distributions of phyla and families
+
+5: visualise qPCR copy numbers within generations

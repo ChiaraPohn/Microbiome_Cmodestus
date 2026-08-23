@@ -21,7 +21,7 @@ Have a permanent and working space both organized in the same way, with the proj
 7.	Run diamond on the combined data via taxonomy_chiara.slurm
 8.	Check contigs for Rdrp presence by running palm_annot.slurm
 9.	Run blastn_combined.sh to BLAST smaller contigs to the found Rdrp-containing cluster representatives, as well as all picorna-like and toti-like contigs to the largest genome found in our dataset
-10.	For trees: make an additional directory called trees in the permanent storage, use the get_contigs.sh script to produce fasta files for each tree using the text files produced in R
+(10.	For trees: make an additional directory called trees in the permanent storage, use the get_contigs.sh script to produce fasta files for each tree using the text files produced in R)
 11.	Run cleanup.sh to copy all important files to the permanent storage
 
 

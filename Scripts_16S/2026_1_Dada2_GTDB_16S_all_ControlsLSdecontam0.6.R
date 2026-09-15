@@ -21,7 +21,7 @@ library("devtools")
 library(dada2)
 packageVersion("dada2")
 
-here::i_am("Scripts_2025_16S_all/2025_1_Dada2_GTDB_16S_all.R")
+here::i_am("Scripts_16S/2026_1_Dada2_GTDB_16S_all_ControlsLSdecontam0.6.R")
 
 Project <- "16S_all"
 Database <- "GTDB"
@@ -109,7 +109,7 @@ track <- cbind(out, sapply(dadaFs, getN), sapply(dadaRs, getN), sapply(mergers, 
 colnames(track) <- c("input", "filtered", "denoisedF", "denoisedR", "merged", "nonchim")
 rownames(track) <- sample.names
 head(track)
-write.table(track, file = "trackingReads.tsv", sep = "\t", row.names = TRUE)
+write.table(track, file = "16S_data_all/trackingReads.tsv", sep = "\t", row.names = TRUE)
 
 library(DECIPHER)
 packageVersion("DECIPHER")

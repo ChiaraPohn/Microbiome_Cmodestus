@@ -23,8 +23,6 @@ here::i_am("Scripts_Virome/2026_1_load_data.R")
 
 #paths to my tables
 abundance_table <- "Tables_Virome_2026/LS_abundance_1000.tsv"
-#or
-#abundance_table <- "Tables_Virome_2026/LS_abundance_1000.tsv"
 
 taxonomy_table <- "Tables_Virome_2026/taxonomy/LS_taxonomy-taxfile.tsv"
 metadata_table <- "LS_Cmodestus_metadata.csv"

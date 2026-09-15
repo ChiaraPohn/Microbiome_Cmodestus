@@ -60,12 +60,12 @@ OTU_tidy
 new_otu_names <- c("NODE_A13_length_3436_cov_154.678773_W39" = "Broome luteo-like virus 1", 
                    "NODE_A1_length_10358_cov_1043.127711_W54"= "Alexandroupolis virga-like virus 1", 
                    "NODE_A1_length_11032_cov_3358.452670_W34" = "Yongsan negev-like virus 1", 
-                   "NODE_A1_length_7154_cov_76.883284_LS63" = "CmLeuv toti-like virus LS63", 
+                   "NODE_A1_length_7154_cov_76.883284_LS63" = "CuLmo virus LS63", 
                    "NODE_A1_length_9685_cov_312.741153_W50" ="XiangYun picorna-like virus 2 W50", 
                    "NODE_A1_length_9715_cov_66.678149_LS33" ="XiangYun picorna-like virus 2 LS33", 
                    "NODE_A3_length_5049_cov_26.666935_LS40" = "XiangYun picorna-like virus 2 LS40",
                    "NODE_A2_length_6321_cov_434.172165_LS72" = "Culex inatomii totivirus",
-                   "NODE_A2_length_7099_cov_245.671176_W34" = "CmLeuv toti-like virus W34", 
+                   "NODE_A2_length_7099_cov_245.671176_W34" = "CuLmo virus W34", 
                    "NODE_A45_length_2262_cov_3.486957_LS18" = "Parvovirus NIH-CQV", 
                    "NODE_A26_length_2598_cov_59.167394_LS_NIC2" = "Parvo-like hybrid virus", 
                    "NODE_A25_length_3182_cov_46.514654_LS_NIC5" = "Parvovirus NIH-CQV",
@@ -117,7 +117,7 @@ ggplot(OTU_tidy, aes(x = Sample, y = OTU, fill = Abundance)) +
 ggsave("Plots_Virome/Heatmap_wContaminants_2026.png", dpi = 300, width = 280, height = 130, units = "mm")
 
 
-#only relevant (cofirmed) OTUs:
+#only relevant (confirmed) OTUs:
 
 otu_filtered <- OTU_X[rownames(OTU_X) %in% selected_otus, ]
 
@@ -137,12 +137,12 @@ OTU_tidy
 new_otu_names <- c("NODE_A13_length_3436_cov_154.678773_W39" = "Broome luteo-like virus 1", 
                    "NODE_A1_length_10358_cov_1043.127711_W54"= "Alexandroupolis virga-like virus 1", 
                    "NODE_A1_length_11032_cov_3358.452670_W34" = "Yongsan negev-like virus 1", 
-                   "NODE_A1_length_7154_cov_76.883284_LS63" = "CmLeuv toti-like virus LS63", 
+                   "NODE_A1_length_7154_cov_76.883284_LS63" = "CuLmo virus LS63", 
                    "NODE_A1_length_9685_cov_312.741153_W50" ="XiangYun picorna-like virus 2 W50", 
                    "NODE_A1_length_9715_cov_66.678149_LS33" ="XiangYun picorna-like virus 2 LS33", 
                    "NODE_A3_length_5049_cov_26.666935_LS40" = "XiangYun picorna-like virus 2 LS40",
                    "NODE_A2_length_6321_cov_434.172165_LS72" = "Culex inatomii totivirus",
-                   "NODE_A2_length_7099_cov_245.671176_W34" = "CmLeuv toti-like virus W34", 
+                   "NODE_A2_length_7099_cov_245.671176_W34" = "CuLmo virus W34", 
                     "NODE_A34_length_1757_cov_2823.761905_G28" = "Sonnbo virus", 
                    "NODE_A35_length_1757_cov_2823.631548_G28" = "Sonnbo virus",
                    "NODE_A4_length_5001_cov_97.426483_W50" = "Tombusviridae sp.")

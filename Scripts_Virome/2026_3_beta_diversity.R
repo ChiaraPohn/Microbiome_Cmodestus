@@ -1,7 +1,7 @@
 ### Beta diversity ###
 
 # Determine location
-here::i_am("Scripts_Virome/2025_3_beta_diversity.R")
+here::i_am("Scripts_Virome/2026_3_beta_diversity.R")
 
 source("2025_2_alpha_diversity.R")
 
@@ -98,7 +98,5 @@ for (Factor in Factors) {
               row.names = TRUE)
 }
 
-
-#leaving out the heatmap of comparisons
 
        

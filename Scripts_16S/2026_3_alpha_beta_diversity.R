@@ -9,10 +9,6 @@ Project <- "onlyLS_16S_decontam0.5"
 Factor <- "Generation"
 Heading <- "Bacteriome"
 
-#load("LS_Cmodestus_16S_SILVA.RData")
-#or
-#load("16S_all_50GTDB.RData")
-#source("2025_3_excludeHighWolbachiaSamples.R")
 
 alpha_rarefied <- function(ab_table, sequencing_depth) {
   df <- ab_table %>%

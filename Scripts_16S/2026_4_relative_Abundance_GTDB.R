@@ -9,7 +9,7 @@ library(ggtext)
 library(ggalluvial)
 library(patchwork)
 
-#source("2025_4_alpha_beta_diversity.R")
+#source("2026_4_alpha_beta_diversity.R")
 
 #' Custom legend plot function
 addSmallLegend <- function(myPlot, pointSize = 0.75, textSize = 6, spaceLegend = 0.1) {
@@ -152,7 +152,7 @@ phylum_table <- rel_abundance_clean |>
   group_by(clean_Phylum, Sample) |> 
   summarize(clean_phylum_sum=round(sum(Abundance), 2)) |> 
   pivot_wider(names_from = Sample, values_from = clean_phylum_sum)
-write_delim(phylum_table, "phylum_relative_abundance.tsv", delim = "\t", col_names = T)
+write_delim(phylum_table, "16S_data_all/phylum_relative_abundance.tsv", delim = "\t", col_names = T)
 
 # Create relative abundance plot
 pal <- c(viridisLite::viridis(

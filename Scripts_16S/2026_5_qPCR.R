@@ -6,13 +6,15 @@ library(tidyr)
 library(dplyr)
 library(ggpubr)
 
-qPCR_data <- read.table("16S_data_all/qPCR.csv", header=TRUE, sep=";")
+#qPCR_data <- read.table("16S_data_all/qPCR.csv", header=TRUE, sep=";")
+qPCR_data <- read.table("16S_data_all/16S_qPCR_2026.csv", header=TRUE, sep=";")
+
 
 qPCR_data <- qPCR_data %>%
   replace_na(list(Conc_library = 0))
 
 
-ggplot(qPCR_data, aes(x = Generation, y = CopyNumber, color = Generation)) +
+ggplot(qPCR_data, aes(x = Generation, y = Mean_new, color = Generation)) +
   geom_boxplot() +
   geom_jitter(width = 0.2, alpha = 0.6)+
   scale_y_log10() +
@@ -25,9 +27,9 @@ ggplot(qPCR_data, aes(x = Generation, y = CopyNumber, color = Generation)) +
     label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
   )
 
-ggsave("Plots_16S/qPCR_Boxplots_Generation.png", dpi=300, width=180, height=120, units=c("mm"))
+ggsave("Plots_16S/qPCR_Boxplots_Generation_2026.png", dpi=300, width=180, height=120, units=c("mm"))
 
-ggplot(qPCR_data, aes(x = Sample, y = CopyNumber, fill = Generation)) +
+ggplot(qPCR_data, aes(x = Sample, y = Mean_new, fill = Generation)) +
   geom_bar(stat = "identity") +
   facet_grid(.~Generation, scales = "free_x") +
   labs(x = "Sample", y = "Copies", title = "16S Copy Nubmers") +
@@ -35,5 +37,5 @@ ggplot(qPCR_data, aes(x = Sample, y = CopyNumber, fill = Generation)) +
   theme_minimal() +
   theme(axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 6))
 
-ggsave("Plots_16S/qPCR_BarplotCopies.png", dpi=300, width=300, height=160, units=c("mm"))
+ggsave("Plots_16S/qPCR_BarplotCopies_2026.png", dpi=300, width=300, height=160, units=c("mm"))
 

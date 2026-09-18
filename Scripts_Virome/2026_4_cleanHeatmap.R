@@ -4,7 +4,7 @@ library(paletteer)
 library(ggthemes)
 library(patchwork)
 
-here::i_am("Scripts_Virome/2025_4_cleanHeatmap.R")
+here::i_am("Scripts_Virome/2026_4_cleanHeatmap.R")
 #source("Scripts_Virome/2025_2_alpha_diversity.R")
 
 #number of total reads for my contigs of interest:
@@ -114,7 +114,7 @@ ggplot(OTU_tidy, aes(x = Sample, y = OTU, fill = Abundance)) +
     axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 6, color = "black")
   )
 
-ggsave("Plots_Virome/Heatmap_wContaminants_2026.png", dpi = 300, width = 280, height = 130, units = "mm")
+ggsave("Plots_Virome/Heatmap_wContaminants_2026_CuLmo.png", dpi = 300, width = 280, height = 130, units = "mm")
 
 
 #only relevant (confirmed) OTUs:
@@ -185,7 +185,7 @@ main_heatmap <- ggplot(OTU_tidy, aes(x = Sample, y = OTU, fill = Abundance)) +
 
 main_heatmap 
 
-ggsave("Plots_Virome/Heatmap_palmprint_2026_withLS40.png", dpi = 300, width = 280, height = 130, units = "mm")
+ggsave("Plots_Virome/Heatmap_palmprint_2026_CuLmo.png", dpi = 300, width = 280, height = 130, units = "mm")
 
 generation_palette <- c(
   "F0 2020" = "tomato",     
@@ -215,7 +215,7 @@ combined_plot <- (main_heatmap / generation_bar) +
   theme(legend.position = "right")
 combined_plot
 
-ggsave("Plots_Virome/Heatmap_palmprint_generation_2026_wLS40.png", dpi = 300, width = 280, height = 150, units = "mm")
+ggsave("Plots_Virome/Heatmap_palmprint_generation_2026_CuLmo.png", dpi = 300, width = 280, height = 150, units = "mm")
 
 
 

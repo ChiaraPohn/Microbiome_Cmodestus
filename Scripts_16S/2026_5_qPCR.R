@@ -25,6 +25,9 @@ ggplot(qPCR_data, aes(x = Generation, y = Mean_new, color = Generation)) +
   stat_pwc(
     method = "wilcox.test", p.adjust.method = "BH",
     label = "p.adj.format", hide.ns = "p.adj", show.legend = F, tip.length = 0.01
+  ) +
+  theme(
+    axis.text.x = element_text(angle = 45)
   )
 
 ggsave("Plots_16S/qPCR_Boxplots_Generation_2026.png", dpi=300, width=180, height=120, units=c("mm"))

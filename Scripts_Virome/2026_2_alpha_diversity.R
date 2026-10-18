@@ -72,6 +72,9 @@ alpha_average_df <- Reduce(`+`, alpha_df_list) / length(alpha_df_list)
 alpha_average_df <- alpha_average_df %>% 
   mutate(Observed=round(Observed))
 
+
+
+
 for (Factor in Factors) {
 alpha <- alpha_average_df %>%
   rownames_to_column("Sample") %>%
@@ -100,4 +103,114 @@ alpha
 
 ggsave(paste0("Plots_Virome/", Project, "_AlphaDiversity_", Factor, ".png"), dpi = 300, width = 200, height = 120, units = "mm")
 }
+
+
+
+
+# Make sure metadata is a regular tibble with sample IDs
+meta <- as.data.frame(phyloseq::sample_data(phyloseq))
+meta$Sample <- rownames(meta)
+meta <- tibble::as_tibble(meta)
+
+# Store results for both grouping variables
+all_results <- list()
+
+for (Factor in Factors) {
+  # Prepare alpha diversity data
+  alpha_data <- alpha_average_df %>%
+    tibble::rownames_to_column("Sample") %>%
+    dplyr::left_join(meta %>%
+        dplyr::select(Sample, dplyr::all_of(Factor)),by = "Sample") %>%
+    tidyr::pivot_longer(cols = c(Observed, Shannon, Simpson),
+      names_to = "Metric",values_to = "Diversity") %>%
+    dplyr::filter(!is.na(.data[[Factor]]),is.finite(Diversity)) %>%
+    dplyr::mutate(Group = droplevels(as.factor(.data[[Factor]]))
+    )
+
+    # 1. Kruskal-Wallis global tests
+
+  kw_table <- alpha_data %>%
+    dplyr::group_by(Metric) %>%
+    dplyr::group_modify(~ {
+      dat <- .x %>%
+        dplyr::filter(!is.na(Group)) %>%
+        dplyr::mutate(Group = droplevels(Group))
+      n_groups <- dplyr::n_distinct(dat$Group)
+      if (n_groups < 2) {
+        return(tibble::tibble(Test = "Kruskal-Wallis",
+          Group1 = NA_character_,Group2 = NA_character_,
+          Statistic = NA_real_, p_value = NA_real_))
+      }
+
+      test <- kruskal.test(Diversity ~ Group, data = dat)
+      tibble::tibble(Test = "Kruskal-Wallis",
+        Group1 = NA_character_, Group2 = NA_character_,
+        Statistic = unname(test$statistic), p_value = test$p.value)
+    }) %>%
+    dplyr::ungroup()
+
+  # 2. Pairwise Wilcoxon tests
+
+  wilcox_table <- alpha_data %>%
+    dplyr::group_by(Metric) %>%
+    dplyr::group_modify(~ {
+      dat <- .x %>%
+        dplyr::filter(!is.na(Group)) %>%
+        dplyr::mutate(Group = droplevels(Group))
+      if (dplyr::n_distinct(dat$Group) < 2) {
+        return(tibble::tibble(Test = character(),
+          Group1 = character(), Group2 = character(),
+          Statistic = numeric(), p_value = numeric()))
+      }
+
+      result <- pairwise.wilcox.test(
+        x = dat$Diversity,
+        g = dat$Group,
+        p.adjust.method = "BH",
+        exact = FALSE
+      )
+
+      # Extract each pair once from the triangular p-value matrix
+      as.data.frame(as.table(result$p.value)) %>%
+        dplyr::filter(!is.na(Freq)) %>%
+        dplyr::transmute(
+          Test = "Wilcoxon",
+          Group1 = as.character(Var1),
+          Group2 = as.character(Var2),
+          Statistic = NA_real_,
+          p_value = as.numeric(Freq)
+        )
+    }) %>%
+    dplyr::ungroup()
+
+  # 3. Combine results into a single table
+
+  results_table <- dplyr::bind_rows(kw_table,  wilcox_table) %>%
+    dplyr::group_by(Metric, Test) %>%
+    dplyr::mutate(
+      p_adj = if (dplyr::first(Test) == "Kruskal-Wallis") {
+        p.adjust(p_value, method = "BH")
+      } else {
+        # Pairwise p-values are already BH-adjusted
+        p_value
+      }
+    ) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(Factor = Factor, .before = 1) %>%
+    dplyr::select(
+      Factor, Metric, Test, Group1, Group2,
+      Statistic, p_value, p_adj
+    )
+
+  all_results[[Factor]] <- results_table
+
+# 5. One combined table for all factors
+
+all_results_table <- dplyr::bind_rows(all_results)
+
+# Export the table
+ readr::write_csv(
+   all_results_table,
+   paste0(Project, "_alpha_diversity_statistics.csv")
+ )
 

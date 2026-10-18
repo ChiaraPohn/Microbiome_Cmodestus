@@ -82,6 +82,70 @@ ggsave(paste0("Plots_16S/", Project, "_", Database,"_AlphaDiversity_", Factor, "
 
 
 
+# Factors to investigate
+Factors <- c("Generation", "Generation_combinedF0", "Water.", "Food_larvae")
+
+# Prepare metadata
+meta <- as.data.frame(phyloseq::sample_data(ps))
+meta$Sample <- rownames(meta)
+meta <- tibble::as_tibble(meta)
+
+# Prepare alpha diversity data
+alpha_data <- alpha_average_df %>%
+  tibble::rownames_to_column("Sample") %>%
+  dplyr::left_join(
+    meta %>% dplyr::select(Sample, dplyr::all_of(Factors)),
+    by = "Sample"
+  ) %>%
+  tidyr::pivot_longer(
+    cols = c(Observed, Shannon, Simpson),
+    names_to = "Metric",
+    values_to = "Diversity"
+  )
+
+# Run Kruskal-Wallis tests for each factor and metric
+kw_results <- purrr::map_dfr(Factors, function(Factor) {
+  
+  alpha_data %>%
+    dplyr::filter(!is.na(.data[[Factor]]), is.finite(Diversity)) %>%
+    dplyr::group_by(Metric) %>%
+    dplyr::group_modify(~ {
+      
+      dat <- .x
+      groups <- droplevels(as.factor(dat[[Factor]]))
+      
+      if (dplyr::n_distinct(groups) < 2) {
+        return(tibble::tibble(
+          Statistic = NA_real_,
+          p_value = NA_real_
+        ))
+      }
+      
+      test <- kruskal.test(dat$Diversity, groups)
+      
+      tibble::tibble(
+        Statistic = unname(test$statistic),
+        p_value = test$p.value
+      )
+    }) %>%
+    dplyr::ungroup() %>%
+    dplyr::mutate(Factor = Factor, .before = 1)
+  
+})
+
+# Adjust for multiple testing across metrics and factors
+kw_results <- kw_results %>%
+  dplyr::mutate(
+    p_adj = p.adjust(p_value, method = "BH")
+  ) %>%
+  dplyr::select(
+    Factor, Metric, Statistic, p_value, p_adj
+  )
+
+# Print results
+print(kw_results, n = Inf)
+
+
 # Calculate beta diversity
 vegan_avgdist <- vegan::avgdist(as.data.frame(t(otu_table(ps))), 
                                 sample=min_depth, iterations = 1000, dmethod = "bray")
@@ -129,4 +193,30 @@ adonis_result <- adonis2(vegan_avgdist ~ Generation, data = meta_df, permutation
 
 print(adonis_result)
 
+#save results of statisical tests:
+# Format the PERMANOVA result
+permanova_results <- as.data.frame(adonis_result) %>%
+  tibble::rownames_to_column("Term") %>%
+  dplyr::filter(Term == "Model") %>%
+  dplyr::transmute(Test = "PERMANOVA",
+    Factor = "Generation", Metric = "Bray-Curtis beta diversity",
+    Statistic = F,R2 = R2,  p_value = `Pr(>F)`)
 
+# Format the Kruskal-Wallis results
+kw_export <- kw_results %>%
+  dplyr::transmute(Test = "Kruskal-Wallis",
+    Factor, Metric,  Statistic,  R2 = NA_real_,  p_value, p_adj)
+
+# Add an adjusted-p-value column to the PERMANOVA results
+permanova_results <- permanova_results %>%
+  dplyr::mutate(p_adj = NA_real_)
+
+# Combine results
+combined_results <- dplyr::bind_rows( kw_export,permanova_results
+)
+
+# Save as CSV
+readr::write_csv(
+  combined_results,
+  paste0(Project, "_diversity_statistics.csv")
+)

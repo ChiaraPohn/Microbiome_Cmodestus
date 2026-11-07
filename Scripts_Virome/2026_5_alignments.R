@@ -1,7 +1,7 @@
 ### Aligning contigs assigned to the two most prevalent viruses ###
 
 # Determine location
-here::i_am("Scripts_Virome/2026_6_alignments.R")
+here::i_am("Scripts_Virome/2026_5_alignments.R")
 
 library(tidyverse)
 library(patchwork)
@@ -25,6 +25,9 @@ virus_files <- c(
   toti_like = "Tables_Virome_2026/Blastn_output/toti-like.blastn_header.tsv",
   totilike_LS63    = "Tables_Virome_2026/Blastn_output/NODE_A1_length_7154_cov_76.883284_LS63.blastn_header.tsv",
   totilike_W34 = "Tables_Virome_2026/Blastn_output/NODE_A2_length_7099_cov_245.671176_W34.blastn_header.tsv")
+
+#for my plots: 
+virus_plots <- list()
 
 # Loop over the named vector
 for (virus in names(virus_files)) {
@@ -77,7 +80,8 @@ for (virus in names(virus_files)) {
       subtitle = unique(blastn_header$sseqid),
       x = "Position", y = NULL, color = "percent\nidentity\n"
     ) +
-    scale_colour_gradient(na.value = "black") +
+    scale_colour_gradient(  limits = c(90, 100),  breaks = seq(90, 100, by = 2),
+      labels = function(x) paste0(x, "%"),  na.value = "black",  oob = scales::squish ) +
     theme(
       axis.text.y = element_text(size = 7),  
       plot.title = element_text(size = 14),  
@@ -85,6 +89,8 @@ for (virus in names(virus_files)) {
     ) +
     scale_x_continuous(breaks = seq(0, 10000, by = 500))
   p
+  #store plot in R: 
+  virus_plots[[virus]] <- p
   # Save plot
   ggsave(
     filename = paste0("Plots_Virome/2026_Alignment_", virus, "_contigs.png"),
@@ -92,6 +98,38 @@ for (virus in names(virus_files)) {
     dpi = 300, width = 250, height = 250, units = "mm"
   )
 }
+
+#make plots with rectangles: 
+picorna_rect <- virus_plots$picorna_like +
+  annotate(  "rect",  xmin = 4600, xmax = 9900,   ymin = -Inf, ymax = Inf,
+    color = "red",    fill = NA,    linewidth = 1  ) +
+  labs(title = "XiangYun picorna-like virus 1")
+
+ggsave( filename = paste0("Plots_Virome/2026_Alignment_picorna_contigs_rect.png"),
+  plot = picorna_rect,  dpi = 300, width = 250, height = 250, units = "mm")
+
+toti_rect <- virus_plots$toti_like +
+  annotate(  "rect",  xmin = 0, xmax = 3650,   ymin = -Inf, ymax = Inf,
+             color = "red",    fill = NA,    linewidth = 1  ) +
+  labs(title = "CuLmo virus")
+
+ggsave( filename = paste0("Plots_Virome/2026_Alignment_toti_contigs_rect.png"),
+        plot = toti_rect,  dpi = 300, width = 250, height = 250, units = "mm")
+
+#combine the plots for the paper:
+library(patchwork)
+
+alignment_plots <- (picorna_rect + toti_rect) +
+  plot_layout(guides = "collect") &
+  plot_annotation(tag_levels = "A") & 
+  theme( legend.position = "right", 
+         plot.tag = element_text(size = 14, face = "bold")) +
+  theme(legend.position = "right") 
+  
+
+alignment_plots
+ggsave( filename = paste0("Plots_Virome/2026_Alignments_combined.png"),
+        plot = alignment_plots,  dpi = 300, width = 500, height = 300, units = "mm")
 
 #now get my contig names 
 toti <- read.table("Tables_Virome_2026/outputR/PercentID_corrected_toti_like.csv", header=TRUE, sep=",", dec=".")
